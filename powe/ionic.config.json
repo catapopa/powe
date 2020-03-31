@@ -1,5 +1,7 @@
 {
   "name": "powe",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }
