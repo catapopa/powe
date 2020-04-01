@@ -1,6 +1,6 @@
 {
-  "appId": "io.ionic.starter",
-  "appName": "powe",
+  "appId": "com.example.powe",
+  "appName": "Powe",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",
