@@ -1,6 +1,6 @@
 {
   "appId": "com.example.powe",
-  "appName": "Powe",
+  "appName": "powe",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",
