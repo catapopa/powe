@@ -1,5 +1,5 @@
 {
-  "appId": "com.example.powe",
+  "appId": "io.ionic.starter",
   "appName": "powe",
   "bundledWebRuntime": false,
   "npmClient": "npm",
