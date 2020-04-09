@@ -1,7 +1,7 @@
 {
-  "appId": "io.ionic.starter",
+  "appId": "com.example.powe",
   "appName": "powe",
-  "bundledWebRuntime": false,
+  "bundledWebRuntime": true,
   "npmClient": "npm",
   "webDir": "www",
   "cordova": {}
