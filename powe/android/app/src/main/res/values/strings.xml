@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">powe</string>
+    <string name="title_activity_main">powe</string>
+    <string name="package_name">com.example.powe</string>
+    <string name="custom_url_scheme">com.example.powe</string>
+</resources>
