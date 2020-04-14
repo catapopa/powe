@@ -60,16 +60,16 @@ export class AuthenticationService {
       });
   }
 
-  // Returns true when user is looged in
+  // Returns true when user is logged in
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
-    return (user !== null && user.emailVerified !== false) ? true : false;
+    return (user !== null && user.emailVerified !== false);
   }
 
   // Returns true when user's email is verified
   get isEmailVerified(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
-    return (user.emailVerified !== false) ? true : false;
+    return (user.emailVerified !== false);
   }
 
   // Sign in with Gmail
