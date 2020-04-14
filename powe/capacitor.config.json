@@ -1,8 +1,23 @@
 {
-  "appId": "com.example.powe",
+  "appId": "com.powe.powe",
   "appName": "powe",
-  "bundledWebRuntime": true,
+  "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",
-  "linuxAndroidStudioPath":""
+  "linuxAndroidStudioPath": "",
+  "plugins": {
+    "CapacitorFirebaseAuth": {
+      "providers": [
+        "google.com"
+      ],
+      "languageCode": "en",
+      "nativeAuth": false,
+      "permissions": {
+        "google": [
+          "profile",
+          "https://www.googleapis.com/auth/drive"
+        ]
+      }
+    }
+  }
 }

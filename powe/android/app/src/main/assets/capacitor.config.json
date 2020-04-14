@@ -1,7 +1,8 @@
 {
-  "appId": "com.example.powe",
+  "appId": "com.powe.powe",
   "appName": "powe",
-  "bundledWebRuntime": true,
+  "bundledWebRuntime": false,
   "npmClient": "npm",
-  "webDir": "www"
+  "webDir": "www",
+  "linuxAndroidStudioPath":""
 }

@@ -13,16 +13,14 @@ export class Tab2Page {
 
   getLocation() {
     this.geolocation.getCurrentPosition().then((resp) => {
-      console.log('Latitude: ', resp.coords.latitude);
-      console.log('Longitude: ', resp.coords.longitude);
+      console.log('current position: ', resp.coords);
     }).catch((error) => {
       console.log('Error getting location', error);
     });
 
-    let watch = this.geolocation.watchPosition();
+    const watch = this.geolocation.watchPosition();
     watch.subscribe((data) => {
-      // console.log('accuracy: ', data.coords.accuracy);
-      // console.log('altitude: ', data.coords.altitude);
+      console.log('watch data: ', data.coords);
     });
   }
 

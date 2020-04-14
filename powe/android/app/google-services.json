@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1068508048504",
+    "firebase_url": "https://powe-273408.firebaseio.com",
+    "project_id": "powe-273408",
+    "storage_bucket": "powe-273408.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1068508048504:android:6cb6365e9ef73f232c918d",
+        "android_client_info": {
+          "package_name": "com.powe.powe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1068508048504-e9vo4i6smla98vhhd39pp7t6dk7ufcm9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsdBeetnuRW_yU5iDycXjeFIgLjQ2wG7U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1068508048504-e9vo4i6smla98vhhd39pp7t6dk7ufcm9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

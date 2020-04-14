@@ -2,8 +2,7 @@ export const environment = {
   production: false,
   // serviceHost: 'https://localhost:44303/api/',
   whitelistedDomains: ['localhost:8100'],
-  web:
-  {
+  web: {
     client_id: '1068508048504-gg5q0s8e1urtvuh26ggalf69n54mhi5l.apps.googleusercontent.com',
     project_id: 'powe-273408',
     auth_uri: 'https://accounts.google.com/o/oauth2/auth',
@@ -14,5 +13,15 @@ export const environment = {
     scope: 'email profile',
     accessTokenEndpoint: 'https://www.googleapis.com/oauth2/v4/token',
     resourceUrl: 'https://www.googleapis.com/userinfo/v2/me',
+  },
+  firebaseConfig: {
+    apiKey: 'AIzaSyD50dfyLP68FDQrRDxuAYqFbCWU-Homi2g',
+    authDomain: 'powe-273408.firebaseapp.com',
+    databaseURL: 'https://powe-273408.firebaseio.com',
+    projectId: 'powe-273408',
+    storageBucket: 'powe-273408.appspot.com',
+    messagingSenderId: '1068508048504',
+    appId: '1:1068508048504:web:ff9e0699a089596b2c918d',
+    measurementId: 'G-3B5XZ24G10'
   }
 };
