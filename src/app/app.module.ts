@@ -8,7 +8,6 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
-import { Camera } from '@ionic-native/camera/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { AngularFireModule } from '@angular/fire';
@@ -36,7 +35,6 @@ import { environment } from 'src/environments/environment';
     StatusBar,
     SplashScreen,
     GooglePlus,
-    Camera,
     Geolocation,
     AndroidPermissions,
     AngularFirestoreModule,
