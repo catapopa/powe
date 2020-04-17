@@ -1,3 +1,8 @@
+import { HomePage } from 'src/pages/home/home.page';
+import { ForgotPasswordPage } from './../pages/forgot-password/forgot-password.page';
+import { RegistrationPage } from './../pages/registration/registration.page';
+import { VerifyEmailPage } from './../pages/verify-email/verify-email.page';
+import { LoginPage } from './../pages/login/login.page';
 import { SharedModule } from './../shared/shared.module';
 import { GoogleMapsComponent } from './../components/google-maps/google-maps.component';
 import { NgModule } from '@angular/core';
@@ -17,10 +22,11 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent, HomePage, VerifyEmailPage, RegistrationPage, ForgotPasswordPage, LoginPage],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
@@ -28,7 +34,9 @@ import { environment } from 'src/environments/environment';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    CommonModule,
+    FormsModule,
   ],
   providers: [
     SharedModule,

@@ -6,11 +6,8 @@ import { AuthenticationService } from 'src/core/authentication/authentication.se
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage {
 
   constructor(public authService: AuthenticationService) { }
-
-  ngOnInit() {
-  }
 
 }

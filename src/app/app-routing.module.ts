@@ -1,6 +1,10 @@
-import { TabsPageModule } from '../shared/tabs/tabs.module';
+import { VerifyEmailPage } from './../pages/verify-email/verify-email.page';
+import { ForgotPasswordPage } from './../pages/forgot-password/forgot-password.page';
+import { RegistrationPage } from './../pages/registration/registration.page';
+import { LoginPage } from './../pages/login/login.page';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { HomePage } from 'src/pages/home/home.page';
 
 const routes: Routes = [
   {
@@ -9,27 +13,27 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: () => import('../pages/home/home.module').then(m => m.HomePageModule)
+    component: HomePage
   },
   {
     path: 'login',
-    loadChildren: () => import('../pages/login/login.module').then(m => m.LoginPageModule)
+    component: LoginPage
   },
   {
     path: 'registration',
-    loadChildren: () => import('../pages/registration/registration.module').then(m => m.RegistrationPageModule)
+    component: RegistrationPage
   },
   {
     path: 'verify-email',
-    loadChildren: () => import('../pages/verify-email/verify-email.module').then(m => m.VerifyEmailPageModule)
+    component: VerifyEmailPage
   },
   {
     path: 'forgot-password',
-    loadChildren: () => import('../pages/forgot-password/forgot-password.module').then(m => m.ForgotPasswordPageModule)
+    component: ForgotPasswordPage
   },
   {
     path: 'home',
-    loadChildren: () => import('../pages/home/home.module').then(m => m.HomePageModule)
+    component: HomePage
   },
   // {
   //   path: 'tabs',

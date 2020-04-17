@@ -1,13 +1,8 @@
-import { GoogleMapsComponent } from './../components/google-maps/google-maps.component';
-import { NgModule } from '@angular/core';
+import { NgModule, Injectable } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-
-
+@Injectable()
 @NgModule({
-  declarations: [
-    GoogleMapsComponent
-  ],
   imports: [
     CommonModule
   ]

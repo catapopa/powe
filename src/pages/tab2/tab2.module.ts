@@ -12,7 +12,6 @@ import { Tab2Page } from './tab2.page';
     IonicModule,
     CommonModule,
     FormsModule,
-    // SharedModule,
     RouterModule.forChild([{ path: '', component: Tab2Page }])
   ],
   declarations: [Tab2Page, GoogleMapsComponent]
