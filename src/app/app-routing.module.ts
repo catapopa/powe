@@ -16,6 +16,10 @@ const routes: Routes = [
     component: HomePage
   },
   {
+    path: '',
+    loadChildren: () => import('../shared/tabs/tabs.module').then(m => m.TabsPageModule)
+  },
+  {
     path: 'login',
     component: LoginPage
   },
@@ -30,19 +34,7 @@ const routes: Routes = [
   {
     path: 'forgot-password',
     component: ForgotPasswordPage
-  },
-  {
-    path: 'home',
-    component: HomePage
-  },
-  // {
-  //   path: 'tabs',
-  //   loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
-  // }
-  {
-    path: 'tab2',
-    loadChildren: () => import('../pages/tab2/tab2.module').then(m => m.Tab2PageModule)
-  },
+  }
 ];
 @NgModule({
   imports: [
