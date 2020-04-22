@@ -1,3 +1,4 @@
+import { GoogleMaps } from '@ionic-native/google-maps';
 import { HomePage } from 'src/pages/home/home.page';
 import { ForgotPasswordPage } from './../pages/forgot-password/forgot-password.page';
 import { RegistrationPage } from './../pages/registration/registration.page';
@@ -44,6 +45,7 @@ import { FormsModule } from '@angular/forms';
     SplashScreen,
     GooglePlus,
     Geolocation,
+    GoogleMaps,
     AndroidPermissions,
     AngularFirestoreModule,
     {
