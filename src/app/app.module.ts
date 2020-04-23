@@ -1,3 +1,5 @@
+import { GraphQLModule } from './graphql.module';
+import { Apollo } from 'apollo-angular';
 import { GoogleMaps } from '@ionic-native/google-maps';
 import { HomePage } from 'src/pages/home/home.page';
 import { ForgotPasswordPage } from './../pages/forgot-password/forgot-password.page';
@@ -5,7 +7,6 @@ import { RegistrationPage } from './../pages/registration/registration.page';
 import { VerifyEmailPage } from './../pages/verify-email/verify-email.page';
 import { LoginPage } from './../pages/login/login.page';
 import { SharedModule } from './../shared/shared.module';
-import { GoogleMapsComponent } from './../components/google-maps/google-maps.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -26,11 +27,19 @@ import { environment } from 'src/environments/environment';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+
 @NgModule({
-  declarations: [AppComponent, HomePage, VerifyEmailPage, RegistrationPage, ForgotPasswordPage, LoginPage],
+  declarations: [
+    AppComponent,
+    HomePage,
+    VerifyEmailPage,
+    RegistrationPage,
+    ForgotPasswordPage,
+    LoginPage],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
+    GraphQLModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
@@ -46,6 +55,7 @@ import { FormsModule } from '@angular/forms';
     GooglePlus,
     Geolocation,
     GoogleMaps,
+    Apollo,
     AndroidPermissions,
     AngularFirestoreModule,
     {

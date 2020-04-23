@@ -1,4 +1,17 @@
 import { Component } from '@angular/core';
+import gql from 'graphql-tag';
+import { Apollo } from 'apollo-angular';
+import { Observable } from 'rxjs';
+
+
+const GET_USERS = gql`
+  {
+    users {
+      id
+      name
+    }
+  }
+`;
 
 @Component({
   selector: 'powe-tab3',
@@ -7,6 +20,12 @@ import { Component } from '@angular/core';
 })
 export class Tab3Page {
 
-  constructor() {}
+  users: Observable<any>;
 
+  constructor(private apollo: Apollo) {
+    // this.apollo.watchQuery({ query: GET_USERS })
+    //   .valueChanges.subscribe((result) =>
+    //     console.log(result)
+    //   );
+  }
 }

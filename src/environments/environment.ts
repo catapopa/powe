@@ -1,7 +1,7 @@
 // noinspection SpellCheckingInspection
 export const environment = {
   production: false,
-  // serviceHost: 'https://localhost:44303/api/',
+  serviceHost: 'http://localhost:8080/v1/graphql',
   whitelistedDomains: ['localhost:8100'],
   web: {
     client_id: '1068508048504-gg5q0s8e1urtvuh26ggalf69n54mhi5l.apps.googleusercontent.com',
@@ -24,11 +24,5 @@ export const environment = {
     messagingSenderId: '1068508048504',
     appId: '1:1068508048504:web:ff9e0699a089596b2c918d',
     measurementId: 'G-3B5XZ24G10'
-  },
-  maps: {
-    GOOGLE_MAPS_ANDROID_API_KEY: '',
-    GOOGLE_MAPS_IOS_API_KEY: '',
-    API_KEY_FOR_BROWSER_RELEASE: '',
-    API_KEY_FOR_BROWSER_DEBUG: ''
   }
 };
