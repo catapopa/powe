@@ -3,7 +3,7 @@ import { auth } from 'firebase/app';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { User } from 'src/shared/models/user';
+import { UserLogin } from 'src/shared/models/user-login';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 
@@ -12,22 +12,17 @@ import 'firebase/auth';
 })
 
 export class AuthenticationService {
+
   userData: any;
 
-  constructor(
-    public afStore: AngularFirestore,
-    public ngFireAuth: AngularFireAuth,
-    public router: Router,
-    public ngZone: NgZone
-  ) {
+  constructor(public afStore: AngularFirestore, public ngFireAuth: AngularFireAuth, public router: Router, public ngZone: NgZone) {
     this.ngFireAuth.authState.subscribe(user => {
       if (user) {
         this.userData = user;
         localStorage.setItem('user', JSON.stringify(this.userData));
-        JSON.parse(localStorage.getItem('user'));
+        this.router.navigate(['tabs']);
       } else {
         localStorage.setItem('user', null);
-        JSON.parse(localStorage.getItem('user'));
       }
     });
   }
@@ -43,32 +38,29 @@ export class AuthenticationService {
   }
 
   // Email verification when new user register
-  SendVerificationMail() {
-    return firebase.auth().currentUser.sendEmailVerification()
-      // return this.ngFireAuth.auth.currentUser.sendEmailVerification()
-      .then(() => {
-        this.router.navigate(['verify-email']);
-      });
+  async SendVerificationMail() {
+    await firebase.auth().currentUser.sendEmailVerification();
+    this.router.navigate(['verify-email']);
   }
 
   // Recover password
-  PasswordRecover(passwordResetEmail) {
-    return this.ngFireAuth.sendPasswordResetEmail(passwordResetEmail)
-      .then(() => {
-        window.alert('Password reset email has been sent, please check your inbox.');
-      }).catch((error) => {
-        window.alert(error);
-      });
+  async PasswordRecover(passwordResetEmail) {
+    try {
+      await this.ngFireAuth.sendPasswordResetEmail(passwordResetEmail);
+      window.alert('Password reset email has been sent, please check your inbox.');
+    } catch (error) {
+      window.alert(error);
+    }
   }
 
   // Returns true when user is logged in
-  get isLoggedIn(): boolean {
+  isAuthenticated(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
     return (user !== null && user.emailVerified !== false);
   }
 
   // Returns true when user's email is verified
-  get isEmailVerified(): boolean {
+  isEmailVerified(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
     return (user.emailVerified !== false);
   }
@@ -79,22 +71,19 @@ export class AuthenticationService {
   }
 
   // Auth providers
-  AuthLogin(provider) {
-    return this.ngFireAuth.signInWithPopup(provider)
-      .then((result) => {
-        this.ngZone.run(() => {
-          this.router.navigate(['tabs']);
-        });
-        this.SetUserData(result.user);
-      }).catch((error) => {
-        window.alert(error);
-      });
+  async AuthLogin(provider: auth.AuthProvider) {
+    try {
+      const result = await this.ngFireAuth.signInWithPopup(provider);
+      this.SetUserData(result.user);
+    } catch (error) {
+      window.alert(error);
+    }
   }
 
   // Store user in localStorage
-  SetUserData(user) {
+  SetUserData(user: firebase.User) {
     const userRef: AngularFirestoreDocument<any> = this.afStore.doc(`users/${user.uid}`);
-    const userData: User = {
+    const userData: UserLogin = {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
@@ -107,11 +96,9 @@ export class AuthenticationService {
   }
 
   // Sign-out
-  SignOut() {
-    return this.ngFireAuth.signOut().then(() => {
-      localStorage.removeItem('user');
-      this.router.navigate(['login']);
-    });
+  async SignOut() {
+    await this.ngFireAuth.signOut();
+    localStorage.removeItem('user');
+    this.router.navigate(['login']);
   }
-
 }

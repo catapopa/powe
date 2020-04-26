@@ -1,5 +1,4 @@
 import { GraphQLModule } from './graphql.module';
-import { Apollo } from 'apollo-angular';
 import { GoogleMaps } from '@ionic-native/google-maps';
 import { HomePage } from 'src/pages/home/home.page';
 import { ForgotPasswordPage } from './../pages/forgot-password/forgot-password.page';
@@ -55,7 +54,6 @@ import { FormsModule } from '@angular/forms';
     GooglePlus,
     Geolocation,
     GoogleMaps,
-    Apollo,
     AndroidPermissions,
     AngularFirestoreModule,
     {

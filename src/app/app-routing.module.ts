@@ -1,3 +1,4 @@
+import { AuthGuardService } from './../core/auth-guard.service';
 import { VerifyEmailPage } from './../pages/verify-email/verify-email.page';
 import { ForgotPasswordPage } from './../pages/forgot-password/forgot-password.page';
 import { RegistrationPage } from './../pages/registration/registration.page';

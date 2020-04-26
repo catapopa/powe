@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '../../core/authentication/authentication.service';
+import { AuthenticationService } from '../../core/authentication.service';
 
 
 @Component({
@@ -11,18 +11,13 @@ import { AuthenticationService } from '../../core/authentication/authentication.
 
 export class LoginPage implements OnInit {
 
-  constructor(
-    public authService: AuthenticationService,
-    public router: Router
-  ) {
-  }
+  constructor(public authService: AuthenticationService, public router: Router) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   logIn(email, password) {
     this.authService.SignIn(email.value, password.value)
-      .then((res) => {
+      .then(() => {
         if (this.authService.isEmailVerified) {
           this.router.navigate(['tabs']);
         } else {
@@ -33,5 +28,4 @@ export class LoginPage implements OnInit {
         window.alert(error.message);
       });
   }
-
 }
