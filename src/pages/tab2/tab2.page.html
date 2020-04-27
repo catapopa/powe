@@ -13,7 +13,14 @@
     </ion-toolbar>
   </ion-header>
 
-  <powe-google-maps>Hello World</powe-google-maps>
+  <powe-google-maps></powe-google-maps>
 
-  <ion-button (click)="getLocation()">Location</ion-button>
+  <!-- <ion-list>
+    <ion-list-header>Previous Tracks</ion-list-header>
+    <ion-item *ngFor="let route of previousTracks">
+      {{ route.finished | date }}, {{ route.path.length }} Waypoints
+      <button ion-button clear item-end (click)="showHistoryRoute(route.path)">View Route</button>
+    </ion-item>
+  </ion-list> -->
+
 </ion-content>

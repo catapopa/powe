@@ -1,3 +1,4 @@
+import { GoogleMapsComponent } from './../components/google-maps/google-maps.component';
 import { GraphQLModule } from './graphql.module';
 import { GoogleMaps } from '@ionic-native/google-maps';
 import { HomePage } from 'src/pages/home/home.page';
@@ -25,7 +26,10 @@ import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { google } from 'google-maps';
 
+
+declare var google: google;
 
 @NgModule({
   declarations: [
@@ -34,7 +38,8 @@ import { FormsModule } from '@angular/forms';
     VerifyEmailPage,
     RegistrationPage,
     ForgotPasswordPage,
-    LoginPage],
+    LoginPage
+  ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),

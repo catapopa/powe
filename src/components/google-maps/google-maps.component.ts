@@ -1,6 +1,10 @@
 import { Component, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { filter } from 'rxjs/operators';
+import { google } from 'google-maps';
 
+
+declare var google: google;
 
 @Component({
   selector: 'powe-google-maps',
@@ -9,17 +13,19 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 })
 export class GoogleMapsComponent implements AfterViewInit, OnDestroy {
 
-  constructor(private geolocation: Geolocation) {
-  }
-
-
   @ViewChild('mapContainer', { static: false }) gmap: ElementRef;
+
+  isTracking: boolean;
   title = 'angular-gmap';
   route: Array<{ lat: number, lng: number }> = [];
   locationWatch;
   map: google.maps.Map;
   lat = 0;
   lng = 0;
+  currentMapTrack: any;
+
+
+  constructor(private geolocation: Geolocation) { }
 
   ngAfterViewInit() {
     this.getLocation();
@@ -42,9 +48,7 @@ export class GoogleMapsComponent implements AfterViewInit, OnDestroy {
     const mapOptions: google.maps.MapOptions = {
       center: coordinates,
       zoom: 14,
-      draggable: false,
       scrollwheel: false,
-      zoomControl: false,
       disableDoubleClickZoom: true,
       mapTypeId: google.maps.MapTypeId.TERRAIN
     };
@@ -54,25 +58,45 @@ export class GoogleMapsComponent implements AfterViewInit, OnDestroy {
       map: this.map,
     });
 
-
     this.map = new google.maps.Map(this.gmap.nativeElement, mapOptions);
     marker.setMap(this.map);
   }
 
 
-  startRide() {
-    this.locationWatch = this.geolocation.watchPosition()
-      // .filter((p) => p.coords !== undefined)
+  startTracking() {
+    this.isTracking = true;
+    this.route = [];
+
+    this.locationWatch = this.geolocation.watchPosition().pipe(filter((p) => p.coords !== undefined))
       .subscribe(position => {
         console.log(position.coords.longitude + ' ' + position.coords.latitude);
 
         this.lat = position.coords.latitude;
         this.lng = position.coords.longitude;
         this.route.push({ lat: this.lat, lng: this.lng });
+        this.redrawPath(this.route);
       });
   }
 
-  stopRide() {
+  redrawPath(path) {
+    if (this.currentMapTrack) {
+      this.currentMapTrack.setMap(null);
+    }
+
+    if (path.length > 1) {
+      this.currentMapTrack = new google.maps.Polyline({
+        path,
+        geodesic: true,
+        strokeColor: '#ff00ff',
+        strokeOpacity: 1.0,
+        strokeWeight: 3
+      });
+      this.currentMapTrack.setMap(this.map);
+    }
+  }
+
+  stopTracking() {
+    this.isTracking = false;
     this.locationWatch.unsubscribe();
     console.log(this.route);
   }

@@ -1,3 +1,10 @@
 <div #mapContainer id="map" class="map"></div>
-<ion-button color="primary" (click)="startRide()">Start</ion-button>
-<ion-button color="danger" (click)="stopRide()">Stop</ion-button>
+
+<ion-button expand="block" color="success" icon-left (click)="startTracking()" *ngIf="!isTracking">
+    <ion-icon name="locate"></ion-icon>
+    Start Tracking
+</ion-button>
+<ion-button expand="block" color="danger" icon-left (click)="stopTracking()" *ngIf="isTracking">
+    <ion-icon name="hand"></ion-icon>
+    Stop Tracking
+</ion-button>
