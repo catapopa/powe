@@ -17,6 +17,7 @@ export class GoogleMapsComponent implements AfterViewInit, OnDestroy {
 
   isTracking: boolean;
   title = 'angular-gmap';
+  startTime;
   route: Array<{ lat: number, lng: number }> = [];
   locationWatch;
   map: google.maps.Map;
@@ -24,8 +25,7 @@ export class GoogleMapsComponent implements AfterViewInit, OnDestroy {
   lng = 0;
   currentMapTrack: any;
 
-
-  constructor(private geolocation: Geolocation, private afs: AngularFirestore) { }
+  constructor(private geolocation: Geolocation, private firestore: AngularFirestore) { }
 
   ngAfterViewInit() {
     this.getLocation();
@@ -61,15 +61,13 @@ export class GoogleMapsComponent implements AfterViewInit, OnDestroy {
     marker.setMap(this.map);
   }
 
-
   startTracking() {
     this.isTracking = true;
     this.route = [];
+    this.startTime = new Date();
 
     this.locationWatch = this.geolocation.watchPosition().pipe(filter((p) => p.coords !== undefined))
       .subscribe(position => {
-        console.log(position.coords.longitude + ' ' + position.coords.latitude);
-
         this.lat = position.coords.latitude;
         this.lng = position.coords.longitude;
         this.route.push({ lat: this.lat, lng: this.lng });
@@ -99,9 +97,58 @@ export class GoogleMapsComponent implements AfterViewInit, OnDestroy {
     this.locationWatch.unsubscribe();
 
     if (this.route.length !== 1) {
+
+      // const geocoder = new google.maps.Geocoder();
+      // const latlng = { lat: this.route[0].lat, lng: this.route[0].lng };
+      // geocoder.geocode({ location: latlng }, (results, status) => {
+      //   if (status === 'OK') {
+      //     if (results[0]) {
+      //       console.log(results[0].formatted_address);
+      //     } else {
+      //       window.alert('No results found');
+      //     }
+      //   }
+      // });
+
       const uid = JSON.parse(localStorage.getItem('user')).uid;
-      this.afs.collection('routes').add({ route: this.route, uid });
+      const distance = this.calculateDistance();
+      const stopTime = new Date();
+      const time = this.calculateTime(this.startTime, stopTime);
+
+      const routeDetails = {
+        uid,
+        route: this.route,
+        startTime: this.startTime,
+        stopTime,
+        time,
+        distance
+      };
+
+      this.firestore.collection('routes').add(routeDetails);
     }
+  }
+
+  // calculate final distance
+  calculateDistance() {
+    let distance = 0;
+
+    for (let i = 0; i < this.route.length - 1; i++) {
+      const latlngA = new google.maps.LatLng(this.route[i].lat, this.route[i].lng);
+      const latlngB = new google.maps.LatLng(this.route[i + 1].lat, this.route[i + 1].lng);
+      const distanceAB = google.maps.geometry.spherical.computeDistanceBetween(latlngA, latlngB);
+      distance += distanceAB;
+    }
+
+    return distance * 0.001; // km
+  }
+
+  calculateTime(dt1, dt2) {
+    let diff = (dt2.getTime() - dt1.getTime()) / 1000;
+    diff /= 60;
+
+    const result = Math.abs(Math.round(diff));
+    console.log(result);
+    return result;
   }
 
   ngOnDestroy(): void {

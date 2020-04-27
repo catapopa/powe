@@ -1,4 +1,3 @@
-import { GoogleMapsComponent } from './components/google-maps/google-maps.component';
 import { GraphQLModule } from './graphql.module';
 import { GoogleMaps } from '@ionic-native/google-maps';
 import { HomePage } from 'src/app/pages/home/home.page';
