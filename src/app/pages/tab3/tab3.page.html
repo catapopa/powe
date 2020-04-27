@@ -9,12 +9,15 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Profile</ion-title>
+      <ion-title>Profile</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <div *ngFor="let user of users">
-    {{user.name}}
-  </div>
+  <ion-item>
+    <ion-avatar>
+      <img src={{photoURL}}>
+    </ion-avatar>
+    <ion-label>{{name}}</ion-label>
+  </ion-item>
 
 </ion-content>

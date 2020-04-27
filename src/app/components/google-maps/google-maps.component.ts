@@ -2,7 +2,7 @@ import { Component, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@ang
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { filter } from 'rxjs/operators';
 import { google } from 'google-maps';
-
+import { AngularFirestore } from '@angular/fire/firestore';
 
 declare var google: google;
 
@@ -25,7 +25,7 @@ export class GoogleMapsComponent implements AfterViewInit, OnDestroy {
   currentMapTrack: any;
 
 
-  constructor(private geolocation: Geolocation) { }
+  constructor(private geolocation: Geolocation, private afs: AngularFirestore) { }
 
   ngAfterViewInit() {
     this.getLocation();
@@ -40,7 +40,6 @@ export class GoogleMapsComponent implements AfterViewInit, OnDestroy {
     } catch (error) {
       console.log('Error getting location', error);
     }
-
   }
 
   mapInitializer() {
@@ -98,7 +97,11 @@ export class GoogleMapsComponent implements AfterViewInit, OnDestroy {
   stopTracking() {
     this.isTracking = false;
     this.locationWatch.unsubscribe();
-    console.log(this.route);
+
+    if (this.route.length !== 1) {
+      const uid = JSON.parse(localStorage.getItem('user')).uid;
+      this.afs.collection('routes').add({ route: this.route, uid });
+    }
   }
 
   ngOnDestroy(): void {

@@ -3,7 +3,7 @@ import { auth } from 'firebase/app';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { UserLogin } from 'src/app/shared/models/user-login';
+import { User } from 'src/app/shared/models/user';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 
@@ -15,8 +15,8 @@ export class AuthenticationService {
 
   userData: any;
 
-  constructor(public afStore: AngularFirestore, public ngFireAuth: AngularFireAuth, public router: Router, public ngZone: NgZone) {
-    this.ngFireAuth.authState.subscribe(user => {
+  constructor(public firestore: AngularFirestore, public fireauth: AngularFireAuth, public router: Router) {
+    this.fireauth.authState.subscribe(user => {
       if (user) {
         this.userData = user;
         localStorage.setItem('user', JSON.stringify(this.userData));
@@ -28,13 +28,15 @@ export class AuthenticationService {
   }
 
   // Login in with email/password
-  SignIn(email, password) {
-    return this.ngFireAuth.signInWithEmailAndPassword(email, password);
+  async SignIn(email, password) {
+    const result = await this.fireauth.signInWithEmailAndPassword(email, password);
+    this.SetUserData(result.user);
   }
 
   // Register user with email/password
-  RegisterUser(email, password) {
-    return this.ngFireAuth.createUserWithEmailAndPassword(email, password);
+  async RegisterUser(email, password) {
+    const result = await this.fireauth.createUserWithEmailAndPassword(email, password);
+    this.SetUserData(result.user);
   }
 
   // Email verification when new user register
@@ -46,7 +48,7 @@ export class AuthenticationService {
   // Recover password
   async PasswordRecover(passwordResetEmail) {
     try {
-      await this.ngFireAuth.sendPasswordResetEmail(passwordResetEmail);
+      await this.fireauth.sendPasswordResetEmail(passwordResetEmail);
       window.alert('Password reset email has been sent, please check your inbox.');
     } catch (error) {
       window.alert(error);
@@ -73,7 +75,7 @@ export class AuthenticationService {
   // Auth providers
   async AuthLogin(provider: auth.AuthProvider) {
     try {
-      const result = await this.ngFireAuth.signInWithPopup(provider);
+      const result = await this.fireauth.signInWithPopup(provider);
       this.SetUserData(result.user);
     } catch (error) {
       window.alert(error);
@@ -82,22 +84,24 @@ export class AuthenticationService {
 
   // Store user in localStorage
   SetUserData(user: firebase.User) {
-    const userRef: AngularFirestoreDocument<any> = this.afStore.doc(`users/${user.uid}`);
-    const userData: UserLogin = {
+    const userRef: AngularFirestoreDocument<any> = this.firestore.collection('users').doc(`${user.uid}`);
+
+    const userData: User = {
       uid: user.uid,
       email: user.email,
-      displayName: user.displayName,
+      name: user.displayName,
       photoURL: user.photoURL,
-      emailVerified: user.emailVerified
+      emailVerified: user.emailVerified,
     };
-    return userRef.set(userData, {
-      merge: true
-    });
+
+    return userRef.set(userData, { merge: true });
+    // merge: true - only update the value-key pair passed in
+    // rather than replacing the entire document with what you passed in
   }
 
   // Sign-out
   async SignOut() {
-    await this.ngFireAuth.signOut();
+    await this.fireauth.signOut();
     localStorage.removeItem('user');
     this.router.navigate(['login']);
   }

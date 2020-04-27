@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { User } from 'src/app/shared/models/user';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Component, OnInit } from '@angular/core';
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
 
@@ -28,36 +30,53 @@ const ADD_USER = gql`
 @Component({
   selector: 'powe-tab3',
   templateUrl: 'tab3.page.html',
-  styleUrls: ['tab3.page.scss']
+  styleUrls: ['tab3.page.scss'],
 })
-export class Tab3Page {
+export class Tab3Page implements OnInit {
 
-  users: any;
+  photoURL: string;
+  name: string;
 
-  constructor(private apollo: Apollo) {
-    this.insertUser();
-    this.getUsers();
+  constructor(private apollo: Apollo, private firstore: AngularFirestore) {
+    // this.insertUser();
   }
 
-  insertUser() {
-    this.apollo.mutate({
-      mutation: ADD_USER,
-      variables: {
-        email: 'email',
-        fid: 'fid',
-        name: 'nume'
-      },
-    }).subscribe(({ data }) => {
-      console.log(data);
-    }, (error) => {
-      console.log('there was an error sending the query', error);
-    });
+  ngOnInit() {
+    this.getUserData();
+
   }
 
-  getUsers() {
-    this.apollo.query<any>({ query: GET_USERS }).subscribe(({ data }) => {
-      this.users = data.users;
-      console.log(this.users);
+  // insertUser() {
+  //   this.apollo.mutate({
+  //     mutation: ADD_USER,
+  //     variables: {
+  //       email: 'email',
+  //       fid: 'fid',
+  //       name: 'nume'
+  //     },
+  //   }).subscribe(({ data }) => {
+  //     console.log(data);
+  //   }, (error) => {
+  //     console.log('there was an error sending the query', error);
+  //   });
+  // }
+
+  getUserData() {
+    const uid = JSON.parse(localStorage.getItem('user')).uid;
+    const docRef = this.firstore.collection('users').doc(uid);
+
+    docRef.get().subscribe((result) => {
+
+
+      this.photoURL = result.data().photoURL;
+      this.name = result.data().name;
+
+      console.log('Document data:', result.data());
     });
+
+    // this.apollo.query<any>({ query: GET_USERS }).subscribe(({ data }) => {
+    //   this.users = data.users;
+    //   console.log(this.users);
+    // });
   }
 }

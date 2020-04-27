@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthenticationService } from 'src/app/core/authentication.service';
 
 @Component({
   selector: 'powe-tabs',
@@ -7,6 +8,5 @@ import { Component } from '@angular/core';
 })
 export class TabsPage {
 
-  constructor() {}
-
+  constructor(public authService: AuthenticationService) { }
 }

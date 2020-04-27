@@ -1,11 +1,11 @@
-import { Apollo, Mutation } from 'apollo-angular';
 import { Injectable } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private apollo: Apollo) { }
+  constructor(afs: AngularFirestore) { }
 
 }
