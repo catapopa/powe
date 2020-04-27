@@ -1,5 +1,5 @@
-import { GoogleMapsComponent } from './../../components/google-maps/google-maps.component';
-import { SharedModule } from './../../shared/shared.module';
+import { GoogleMapsComponent } from '../../components/google-maps/google-maps.component';
+import { SharedModule } from '../../shared/shared.module';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';

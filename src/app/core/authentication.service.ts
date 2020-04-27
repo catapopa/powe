@@ -3,7 +3,7 @@ import { auth } from 'firebase/app';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { UserLogin } from 'src/shared/models/user-login';
+import { UserLogin } from 'src/app/shared/models/user-login';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 

@@ -1,11 +1,11 @@
-import { AuthGuardService } from './../core/auth-guard.service';
-import { VerifyEmailPage } from './../pages/verify-email/verify-email.page';
-import { ForgotPasswordPage } from './../pages/forgot-password/forgot-password.page';
-import { RegistrationPage } from './../pages/registration/registration.page';
-import { LoginPage } from './../pages/login/login.page';
+import { AuthGuardService } from './core/auth-guard.service';
+import { VerifyEmailPage } from './pages/verify-email/verify-email.page';
+import { ForgotPasswordPage } from './pages/forgot-password/forgot-password.page';
+import { RegistrationPage } from './pages/registration/registration.page';
+import { LoginPage } from './pages/login/login.page';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { HomePage } from 'src/pages/home/home.page';
+import { HomePage } from 'src/app/pages/home/home.page';
 
 const routes: Routes = [
   {
@@ -18,7 +18,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    loadChildren: () => import('../shared/tabs/tabs.module').then(m => m.TabsPageModule)
+    loadChildren: () => import('./shared/tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {
     path: 'login',
