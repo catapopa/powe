@@ -1,4 +1,3 @@
-import { MapPreviewComponent } from './../../components/map-preview/map-preview.component';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -13,6 +12,6 @@ import { Tab3Page } from './tab3.page';
     FormsModule,
     RouterModule.forChild([{ path: '', component: Tab3Page }])
   ],
-  declarations: [Tab3Page, MapPreviewComponent]
+  declarations: [Tab3Page]
 })
 export class Tab3PageModule { }

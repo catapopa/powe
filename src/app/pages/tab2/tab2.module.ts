@@ -1,4 +1,3 @@
-import { GoogleMapsComponent } from '../../components/google-maps/google-maps.component';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -13,6 +12,6 @@ import { Tab2Page } from './tab2.page';
     FormsModule,
     RouterModule.forChild([{ path: '', component: Tab2Page }])
   ],
-  declarations: [Tab2Page, GoogleMapsComponent]
+  declarations: [Tab2Page]
 })
 export class Tab2PageModule {}

@@ -6,6 +6,6 @@ import { AngularFirestore } from '@angular/fire/firestore/firestore';
 })
 export class UserService {
 
-  constructor(afs: AngularFirestore) { }
+  constructor(db: AngularFirestore) { }
 
 }

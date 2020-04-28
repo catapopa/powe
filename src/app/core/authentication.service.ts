@@ -15,7 +15,7 @@ export class AuthenticationService {
 
   userData: any;
 
-  constructor(public firestore: AngularFirestore, public fireauth: AngularFireAuth, public router: Router) {
+  constructor(public db: AngularFirestore, public fireauth: AngularFireAuth, public router: Router) {
     this.fireauth.authState.subscribe(user => {
       if (user) {
         this.userData = user;
@@ -84,7 +84,7 @@ export class AuthenticationService {
 
   // Store user in localStorage
   SetUserData(user: firebase.User) {
-    const userRef: AngularFirestoreDocument<any> = this.firestore.collection('users').doc(`${user.uid}`);
+    const userRef: AngularFirestoreDocument<any> = this.db.collection('users').doc(`${user.uid}`);
 
     const userData: User = {
       uid: user.uid,
@@ -94,9 +94,7 @@ export class AuthenticationService {
       emailVerified: user.emailVerified,
     };
 
-    return userRef.set(userData, { merge: true });
-    // merge: true - only update the value-key pair passed in
-    // rather than replacing the entire document with what you passed in
+    return userRef.set(userData);
   }
 
   // Sign-out

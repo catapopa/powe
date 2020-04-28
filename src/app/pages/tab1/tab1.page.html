@@ -12,4 +12,9 @@
       <ion-title size="large">Explore</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <div *ngFor="let route of routes$ | async" [class.completed]="route.completed">
+    Distance: {{ route.distance }} km
+    Total time: {{ route.time }}
+  </div>
 </ion-content>

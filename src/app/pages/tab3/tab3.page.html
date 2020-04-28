@@ -20,6 +20,9 @@
     <ion-label>{{name}}</ion-label>
   </ion-item>
 
-  <powe-map-preview></powe-map-preview>
-  
+  <div *ngFor="let route of routes$ | async" [class.completed]="route.completed">
+    Distance: {{ route.distance }} km
+    Total time: {{ route.time }}
+  </div>
+
 </ion-content>
