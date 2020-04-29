@@ -16,8 +16,7 @@ export class Tab2Page implements AfterViewInit, OnDestroy {
   @ViewChild('mapContainer', { static: false }) gmap: ElementRef;
 
   isTracking: boolean;
-  title = 'angular-gmap';
-  startTime;
+  datetimeStart: Date;
   route: Array<{ lat: number, lng: number }> = [];
   locationWatch;
   map: google.maps.Map;
@@ -64,7 +63,7 @@ export class Tab2Page implements AfterViewInit, OnDestroy {
   startTracking() {
     this.isTracking = true;
     this.route = [];
-    this.startTime = new Date();
+    this.datetimeStart = new Date();
 
     this.locationWatch = this.geolocation.watchPosition().pipe(filter((p) => p.coords !== undefined))
       .subscribe(position => {
@@ -96,20 +95,25 @@ export class Tab2Page implements AfterViewInit, OnDestroy {
     this.isTracking = false;
     this.locationWatch.unsubscribe();
 
+    // the user has moved
     if (this.route.length !== 1) {
-
       const uid = JSON.parse(localStorage.getItem('user')).uid;
+      const name = JSON.parse(localStorage.getItem('user')).displayName;
+      const photoURL = JSON.parse(localStorage.getItem('user')).photoURL;
+      const datetimeStop = new Date();
+      const duration = this.calculateTime(this.datetimeStart, datetimeStop);
       const distance = this.calculateDistance();
-      const stopTime = new Date();
-      const time = this.calculateTime(this.startTime, stopTime);
 
       const routeDetails = {
         uid,
+        name,
+        photoURL,
+        datetimeStart: this.datetimeStart,
+        datetimeStop,
         route: this.route,
-        startTime: this.startTime,
-        stopTime,
-        time,
-        distance
+
+        duration,
+        distance,
       };
 
       this.db.collection('routes').add(routeDetails);
@@ -127,7 +131,9 @@ export class Tab2Page implements AfterViewInit, OnDestroy {
       distance += distanceAB;
     }
 
-    return distance * 0.001; // km
+    const result = Math.abs(Math.round(distance * 0.001));
+
+    return result; // km
   }
 
   // calculate activity minutes
@@ -136,7 +142,7 @@ export class Tab2Page implements AfterViewInit, OnDestroy {
     diff /= 60;
 
     const result = Math.abs(Math.round(diff));
-    console.log(result);
+
     return result;
   }
 

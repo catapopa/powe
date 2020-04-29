@@ -3,40 +3,28 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Log in</ion-title>
+    <ion-title>Login</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
   <form>
-    <ion-item lines="full">
-      <ion-label position="floating">Email</ion-label>
-      <ion-input type="text" #email required></ion-input>
-    </ion-item>
+    <ion-label position="floating">Email</ion-label>
+    <ion-input type="text" #email required></ion-input>
 
-    <ion-item lines="full">
-      <ion-label position="floating">Password</ion-label>
-      <ion-input type="password" #password required></ion-input>
-    </ion-item>
+    <ion-label position="floating">Password</ion-label>
+    <ion-input type="password" #password required></ion-input>
 
-    <ion-row>
-      <ion-col>
-        <ion-button type="submit" (click)="logIn(email, password)" expand="block">Login</ion-button>
-      </ion-col>
-    </ion-row>
+    <ion-button type="submit" (click)="logIn(email, password)" expand="block">Login</ion-button>
   </form>
 
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <ion-button type="submit" color="danger" (click)="authService.GoogleAuth()" expand="block">
-          <ion-icon name="logo-google"></ion-icon>
-          Login with Google
-        </ion-button>
-        <ion-button [routerLink]="['/registration']" expand="block">Register</ion-button>
-        <a [routerLink]="['/forgot-password']" class="small-text">Forgot Password?</a>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <ion-button type="submit" color="danger" (click)="authService.GoogleAuth()" expand="block">
+    <ion-icon name="logo-google"></ion-icon>
+    Google
+  </ion-button>
+
+  Don't have an account?
+  <a [routerLink]="['/registration']">Log in</a>
+  <a [routerLink]=" ['/forgot-password']">Forgot Password?</a>
 
 </ion-content>

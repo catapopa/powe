@@ -1,8 +1,12 @@
+
 export interface Route {
     uid: string;
-    startTime: Date;
-    stopTime: Date;
-    distance: number;
-    time: number;
+    name: string;
+    photoURL: string;
+    datetimeStart: Date;
+    datetimeStop: Date;
     route: Array<{ lat: number, lng: number }>;
+
+    duration: number;
+    distance: number;
 }

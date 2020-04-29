@@ -1,28 +1,46 @@
-<ion-header [translucent]="true">
+<ion-header class="ion-padding">
   <ion-toolbar>
     <ion-title>
-      Profile
+      {{name}}
     </ion-title>
   </ion-toolbar>
+  <ion-avatar class="image">
+    <img src={{photoURL}}>
+  </ion-avatar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title>Profile</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <ion-item>
-    <ion-avatar>
-      <img src={{photoURL}}>
-    </ion-avatar>
-    <ion-label>{{name}}</ion-label>
-  </ion-item>
-
+<ion-content class="ion-padding">
   <div *ngFor="let route of routes$ | async" [class.completed]="route.completed">
-    Distance: {{ route.distance }} km
-    Total time: {{ route.time }}
+    <ion-card>
+      <ion-card-header>
+        <ion-row>
+          <ion-col>
+            <ion-card-title>{{route.datetimeStart.seconds * 1000 | date}}</ion-card-title>
+          </ion-col>
+          <ion-col>
+            <ion-card-title>
+              {{route.datetimeStart.seconds * 1000 | date:'HH:mm'}}
+              -
+              {{route.datetimeStop.seconds * 1000 | date:'HH:mm'}}
+            </ion-card-title>
+          </ion-col>
+        </ion-row>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-row>
+          <ion-col>
+            <div>Distance</div>
+          </ion-col>
+          <ion-col>
+            <div>Duration</div>
+          </ion-col>
+          <ion-col>
+            <div>Speed</div>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
   </div>
 
 </ion-content>
