@@ -97,12 +97,19 @@ export class Tab2Page implements AfterViewInit, OnDestroy {
 
     // the user has moved
     if (this.route.length !== 1) {
+      // user
       const uid = JSON.parse(localStorage.getItem('user')).uid;
       const name = JSON.parse(localStorage.getItem('user')).displayName;
       const photoURL = JSON.parse(localStorage.getItem('user')).photoURL;
+      // time
       const datetimeStop = new Date();
-      const duration = this.calculateTime(this.datetimeStart, datetimeStop);
-      const distance = this.calculateDistance();
+      const minutes = this.calculateTimeMinutes(this.datetimeStart, datetimeStop);
+      const duration = this.convertTimeHours(minutes);
+      // distance
+      const meters = this.calculateDistanceMeters();
+      const distance = this.convertDistanceKilometers(meters);
+      // speed
+      const speed = this.calculateSpeed(meters, minutes);
 
       const routeDetails = {
         uid,
@@ -111,9 +118,9 @@ export class Tab2Page implements AfterViewInit, OnDestroy {
         datetimeStart: this.datetimeStart,
         datetimeStop,
         route: this.route,
-
         duration,
         distance,
+        speed
       };
 
       this.db.collection('routes').add(routeDetails);
@@ -121,7 +128,7 @@ export class Tab2Page implements AfterViewInit, OnDestroy {
   }
 
   // calculate final distance
-  calculateDistance() {
+  calculateDistanceMeters() {
     let distance = 0;
 
     for (let i = 0; i < this.route.length - 1; i++) {
@@ -131,17 +138,45 @@ export class Tab2Page implements AfterViewInit, OnDestroy {
       distance += distanceAB;
     }
 
-    const result = Math.abs(Math.round(distance * 0.001));
+    const result = Math.round(distance);
 
-    return result; // km
+    return result;
+  }
+
+  // convert meters to kilometer
+  convertDistanceKilometers(meters: number) {
+    const result = Math.abs(meters / 1000.0); // km
+
+    return result;
   }
 
   // calculate activity minutes
-  calculateTime(dt1, dt2) {
+  calculateTimeMinutes(dt1, dt2) {
     let diff = (dt2.getTime() - dt1.getTime()) / 1000;
     diff /= 60;
 
     const result = Math.abs(Math.round(diff));
+
+    return result;
+  }
+
+  // convert minutes to hours, minutes
+  convertTimeHours(minutes: number) {
+    const num = minutes;
+    const hours = (num / 60);
+    const rhours = Math.floor(hours);
+    const tminutes = (hours - rhours) * 60;
+    const rminutes = Math.round(tminutes);
+
+    return rhours + 'h, ' + rminutes + 'min';
+  }
+
+  // calculate speed and convert to km/h
+  calculateSpeed(meters: number, minutes: number) {
+    const speed = meters / minutes;
+    const kmh = speed * 0.060; // 1 m / min = 0.060 km / h
+
+    const result = Math.abs(Math.round(kmh));
 
     return result;
   }

@@ -7,6 +7,7 @@ export interface Route {
     datetimeStop: Date;
     route: Array<{ lat: number, lng: number }>;
 
-    duration: number;
+    duration: string;
     distance: number;
+    speed: number;
 }
