@@ -33,7 +33,7 @@ export class ExplorePage implements OnInit {
     });
   }
 
-  getUser(user) {
+  gotoProfile(user) {
     const uid = user.uid;
     this.router.navigate(['friend', uid]);
   }

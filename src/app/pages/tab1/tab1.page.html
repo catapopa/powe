@@ -8,7 +8,7 @@
   <div *ngFor="let route of routes$ | async" [class.completed]="route.completed">
     <ion-card>
       <ion-card-header>
-        <ion-item>
+        <ion-item (click)="gotoProfile(route)">
           <ion-avatar class="image">
             <img src={{route.photoURL}}>
           </ion-avatar>

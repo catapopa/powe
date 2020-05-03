@@ -1,7 +1,8 @@
-import { AngularFirestore } from '@angular/fire/firestore';
+import { Route } from './../../shared/models/route';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { User } from 'src/app/shared/models/user';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'powe-friend',
@@ -12,6 +13,8 @@ export class FriendPage {
 
   name: string;
   photoURL: string;
+  routesRef: AngularFirestoreCollection<Route>;
+  routes$: Observable<Route[]>;
 
   constructor(private route: ActivatedRoute, private db: AngularFirestore) {
     const uid = this.route.snapshot.paramMap.get('uid');
@@ -25,5 +28,11 @@ export class FriendPage {
       this.name = result.data().name;
       this.photoURL = result.data().photoURL;
     });
+
+    // get routes
+    this.routesRef = this.db.collection<Route>('routes', ref =>
+      ref.where('uid', '==', uid).orderBy('datetimeStart', 'desc')
+    );
+    this.routes$ = this.routesRef.valueChanges();
   }
 }

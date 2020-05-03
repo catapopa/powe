@@ -3,7 +3,7 @@
     <ion-searchbar showcancelbutton="" (input)="filterList($event.target.value)"></ion-searchbar>
 
     <ion-list *ngIf="searchTerm">
-      <ion-item *ngFor="let user of users" (click)="getUser(user)">
+      <ion-item *ngFor="let user of users" (click)="gotoProfile(user)">
         <ion-avatar class="image">
           <img src={{user.photoURL}}>
         </ion-avatar>

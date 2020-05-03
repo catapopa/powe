@@ -1,5 +1,6 @@
 import { Route } from './../../shared/models/route';
-import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Component } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
@@ -14,12 +15,17 @@ export class Tab1Page {
   routesRef: AngularFirestoreCollection<Route>;
   routes$: Observable<Route[]>;
 
-  constructor(private db: AngularFirestore) {
+  constructor(private db: AngularFirestore, private router: Router) {
     this.getRoutes();
   }
 
   getRoutes() {
     this.routesRef = this.db.collection<Route>('routes', ref => ref.orderBy('datetimeStart', 'desc'));
     this.routes$ = this.routesRef.valueChanges();
+  }
+
+  gotoProfile(route) {
+    const uid = route.uid;
+    this.router.navigate(['friend', uid]);
   }
 }

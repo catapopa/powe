@@ -13,5 +13,47 @@
 </ion-header>
 
 <ion-content>
+  <div *ngFor="let route of routes$ | async" [class.completed]="route.completed">
+    <ion-card>
+      <ion-card-header>
+        <ion-row>
+          <ion-col>
+            <ion-card-title>{{route.datetimeStart.seconds * 1000 | date}}</ion-card-title>
+          </ion-col>
+          <ion-col>
+            <ion-card-title>
+              {{route.datetimeStart.seconds * 1000 | date:'HH:mm'}}
+              -
+              {{route.datetimeStop.seconds * 1000 | date:'HH:mm'}}
+            </ion-card-title>
+          </ion-col>
+        </ion-row>
+      </ion-card-header>
 
+      <ion-card-content>
+        <ion-row>
+          <ion-col>
+            DISTANCE
+          </ion-col>
+          <ion-col>
+            DURATION
+          </ion-col>
+          <ion-col>
+            SPEED
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            {{route.distance}}km
+          </ion-col>
+          <ion-col>
+            {{route.duration}}
+          </ion-col>
+          <ion-col>
+            {{route.speed}} km/h
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>
