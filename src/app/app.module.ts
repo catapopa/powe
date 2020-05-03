@@ -1,4 +1,3 @@
-import { GraphQLModule } from './graphql.module';
 import { GoogleMaps } from '@ionic-native/google-maps';
 import { HomePage } from 'src/app/pages/home/home.page';
 import { ForgotPasswordPage } from './pages/forgot-password/forgot-password.page';
@@ -24,7 +23,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { google } from 'google-maps';
 
 
@@ -42,7 +41,6 @@ declare var google: google;
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
-    GraphQLModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
@@ -50,6 +48,7 @@ declare var google: google;
     AngularFirestoreModule,
     CommonModule,
     FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     SharedModule,

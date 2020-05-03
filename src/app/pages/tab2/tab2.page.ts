@@ -118,6 +118,7 @@ export class Tab2Page implements AfterViewInit, OnDestroy {
         datetimeStart: this.datetimeStart,
         datetimeStop,
         route: this.route,
+
         duration,
         distance,
         speed

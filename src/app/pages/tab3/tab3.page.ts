@@ -29,7 +29,9 @@ export class Tab3Page {
     });
 
     // get routes
-    this.routesRef = this.db.collection<Route>('routes', ref => ref.where('uid', '==', uid));
+    this.routesRef = this.db.collection<Route>('routes', ref =>
+      ref.where('uid', '==', uid).orderBy('datetimeStart', 'desc')
+    );
     this.routes$ = this.routesRef.valueChanges();
   }
 }

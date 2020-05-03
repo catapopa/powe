@@ -10,12 +10,22 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'explore',
+        path: 'activity',
         children: [
           {
             path: '',
             loadChildren: () =>
               import('../../pages/tab1/tab1.module').then(m => m.Tab1PageModule)
+          }
+        ]
+      },
+      {
+        path: 'explore',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../../pages/explore/explore.module').then(m => m.ExplorePageModule)
           }
         ]
       },
@@ -41,14 +51,14 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/tabs/profile',
+        redirectTo: '/tabs/activity',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/profile',
+    redirectTo: '/tabs/activity',
     pathMatch: 'full'
   }
 ];

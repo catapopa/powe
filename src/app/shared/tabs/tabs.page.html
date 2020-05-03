@@ -1,22 +1,25 @@
 <ion-tabs>
-
   <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="activity">
+      <ion-icon name="analytics-outline"></ion-icon>
+      <ion-label>Activity</ion-label>
+    </ion-tab-button>
+
     <ion-tab-button tab="explore">
-      <ion-icon name="rocket-sharp"></ion-icon>
+      <ion-icon name="rocket-outline"></ion-icon>
       <ion-label>Explore</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="map">
-      <ion-icon name="analytics-sharp"></ion-icon>
+      <ion-icon name="location-outline"></ion-icon>
       <ion-label>Map</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="profile">
-      <ion-icon name="person-circle-outline"></ion-icon>
+      <ion-icon name="happy-outline"></ion-icon>
       <ion-label>Profile</ion-label>
     </ion-tab-button>
 
     <ion-button type="submit" (click)="authService.SignOut()" expand="block">Logout</ion-button>
   </ion-tab-bar>
-
 </ion-tabs>

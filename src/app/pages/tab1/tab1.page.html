@@ -1,12 +1,10 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Explore
-    </ion-title>
+    <ion-title>Activity</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content>
   <div *ngFor="let route of routes$ | async" [class.completed]="route.completed">
     <ion-card>
       <ion-card-header>
@@ -18,6 +16,7 @@
             {{route.name}}
           </ion-label>
         </ion-item>
+
         <ion-row>
           <ion-col>
             <ion-card-title>{{route.datetimeStart.seconds * 1000 | date}}</ion-card-title>
@@ -35,17 +34,27 @@
       <ion-card-content>
         <ion-row>
           <ion-col>
-            <div>Distance</div>
+            DISTANCE
           </ion-col>
           <ion-col>
-            <div>Duration</div>
+            DURATION
           </ion-col>
           <ion-col>
-            <div>Speed</div>
+            SPEED
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            {{route.distance}}km
+          </ion-col>
+          <ion-col>
+            {{route.duration}}
+          </ion-col>
+          <ion-col>
+            {{route.speed}} km/h
           </ion-col>
         </ion-row>
       </ion-card-content>
     </ion-card>
   </div>
-
 </ion-content>

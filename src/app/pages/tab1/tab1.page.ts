@@ -1,5 +1,5 @@
 import { Route } from './../../shared/models/route';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class Tab1Page {
 
-  routesCollectionRef: AngularFirestoreCollection<Route>;
+  routesRef: AngularFirestoreCollection<Route>;
   routes$: Observable<Route[]>;
 
   constructor(private db: AngularFirestore) {
@@ -19,7 +19,7 @@ export class Tab1Page {
   }
 
   getRoutes() {
-    this.routesCollectionRef = this.db.collection<Route>('routes');
-    this.routes$ = this.routesCollectionRef.valueChanges();
+    this.routesRef = this.db.collection<Route>('routes', ref => ref.orderBy('datetimeStart', 'desc'));
+    this.routes$ = this.routesRef.valueChanges();
   }
 }
