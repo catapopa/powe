@@ -1,3 +1,4 @@
+import { FriendPage } from './pages/friend/friend.page';
 import { GoogleMaps } from '@ionic-native/google-maps';
 import { HomePage } from 'src/app/pages/home/home.page';
 import { ForgotPasswordPage } from './pages/forgot-password/forgot-password.page';
@@ -36,7 +37,8 @@ declare var google: google;
     VerifyEmailPage,
     RegistrationPage,
     ForgotPasswordPage,
-    LoginPage
+    LoginPage,
+    FriendPage
   ],
   imports: [
     BrowserModule,

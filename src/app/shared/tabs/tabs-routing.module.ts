@@ -51,14 +51,14 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/tabs/activity',
+        redirectTo: '/tabs/explore',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/activity',
+    redirectTo: '/tabs/explore',
     pathMatch: 'full'
   }
 ];

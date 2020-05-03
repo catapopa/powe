@@ -1,3 +1,4 @@
+import { FriendPage } from './pages/friend/friend.page';
 import { VerifyEmailPage } from './pages/verify-email/verify-email.page';
 import { ForgotPasswordPage } from './pages/forgot-password/forgot-password.page';
 import { RegistrationPage } from './pages/registration/registration.page';
@@ -34,6 +35,10 @@ const routes: Routes = [
   {
     path: 'forgot-password',
     component: ForgotPasswordPage
+  },
+  {
+    path: 'friend/:uid',
+    component: FriendPage
   }
 ];
 @NgModule({
