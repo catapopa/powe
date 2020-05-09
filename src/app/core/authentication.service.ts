@@ -83,7 +83,7 @@ export class AuthenticationService {
   }
 
   // Store user in localStorage
-  SetUserData(user: firebase.User) {
+  SetUserData(user) {
     const userRef: AngularFirestoreDocument<any> = this.db.collection('users').doc(`${user.uid}`);
 
     const userData: User = {

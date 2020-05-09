@@ -10,6 +10,9 @@
     </ion-avatar>
     <ion-label>{{name}}</ion-label>
   </ion-item>
+  <div *ngIf="!following">
+    <ion-button (click)="follow()">Follow</ion-button>
+  </div>
 </ion-header>
 
 <ion-content>
