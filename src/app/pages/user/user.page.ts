@@ -1,4 +1,4 @@
-import { Route } from './../../shared/models/route';
+import { Route } from '../../shared/models/route';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -6,11 +6,11 @@ import { Observable } from 'rxjs';
 import { Circle } from 'src/app/shared/models/circle';
 
 @Component({
-  selector: 'powe-friend',
-  templateUrl: './friend.page.html',
-  styleUrls: ['./friend.page.scss'],
+  selector: 'powe-user',
+  templateUrl: './user.page.html',
+  styleUrls: ['./user.page.scss'],
 })
-export class FriendPage {
+export class UserPage {
 
   following = true;
   cuid: string;

@@ -35,6 +35,6 @@ export class ExplorePage implements OnInit {
 
   gotoProfile(user) {
     const uid = user.uid;
-    this.router.navigate(['friend', uid]);
+    this.router.navigate(['user', uid]);
   }
 }

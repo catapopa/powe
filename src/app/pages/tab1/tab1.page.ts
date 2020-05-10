@@ -26,6 +26,6 @@ export class Tab1Page {
 
   gotoProfile(route) {
     const uid = route.uid;
-    this.router.navigate(['friend', uid]);
+    this.router.navigate(['user', uid]);
   }
 }
