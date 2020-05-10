@@ -13,6 +13,9 @@
   <div *ngIf="!following">
     <ion-button (click)="follow()">Follow</ion-button>
   </div>
+  <div *ngIf="following">
+    <ion-button (click)="unfollow()">Unfollow</ion-button>
+  </div>
 </ion-header>
 
 <ion-content>

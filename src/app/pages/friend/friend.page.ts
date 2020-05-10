@@ -1,6 +1,6 @@
 import { Route } from './../../shared/models/route';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { Component, OnInit } from '@angular/core';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Circle } from 'src/app/shared/models/circle';
@@ -13,6 +13,7 @@ import { Circle } from 'src/app/shared/models/circle';
 export class FriendPage {
 
   following = true;
+  cuid: string;
   uid: string;
   name: string;
   photoURL: string;
@@ -20,7 +21,9 @@ export class FriendPage {
   routes$: Observable<Route[]>;
 
   constructor(private route: ActivatedRoute, private db: AngularFirestore) {
+    this.cuid = JSON.parse(localStorage.getItem('user')).uid;
     this.uid = this.route.snapshot.paramMap.get('uid');
+
     this.getData(this.uid);
     this.isFollowing();
   }
@@ -41,8 +44,7 @@ export class FriendPage {
   }
 
   follow() {
-    const uid = JSON.parse(localStorage.getItem('user')).uid;
-    const circlesRef = this.db.collection('circles/' + uid + '/following').doc(this.uid);
+    const circlesRef = this.db.collection('circles/' + this.cuid + '/following').doc(this.uid);
 
     const circle: Circle = {
       uid: this.uid
@@ -52,9 +54,14 @@ export class FriendPage {
     return circlesRef.set(circle);
   }
 
+  unfollow() {
+    const circlesRef = this.db.collection('circles/' + this.cuid + '/following').doc(this.uid).delete();
+
+    this.following = false;
+  }
+
   isFollowing() {
-    const uid = JSON.parse(localStorage.getItem('user')).uid;
-    const circlesRef = this.db.collection('circles/' + uid + '/following').doc(this.uid);
+    const circlesRef = this.db.collection('circles/' + this.cuid + '/following').doc(this.uid);
 
     circlesRef.get().subscribe((docSnapshot) => {
       this.following = docSnapshot.exists;
