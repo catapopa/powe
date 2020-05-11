@@ -1,7 +1,7 @@
 import { Route } from '../../shared/models/route';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Circle } from 'src/app/shared/models/circle';
 
@@ -20,7 +20,7 @@ export class UserPage {
   routesRef: AngularFirestoreCollection<Route>;
   routes$: Observable<Route[]>;
 
-  constructor(private route: ActivatedRoute, private db: AngularFirestore) {
+  constructor(private route: ActivatedRoute, private db: AngularFirestore, private router: Router) {
     this.cuid = JSON.parse(localStorage.getItem('user')).uid;
     this.uid = this.route.snapshot.paramMap.get('uid');
 
@@ -40,7 +40,7 @@ export class UserPage {
     this.routesRef = this.db.collection<Route>('routes', ref =>
       ref.where('uid', '==', uid).orderBy('datetimeStart', 'desc')
     );
-    this.routes$ = this.routesRef.valueChanges();
+    this.routes$ = this.routesRef.valueChanges({ idField: 'id' });
   }
 
   follow() {
@@ -66,5 +66,11 @@ export class UserPage {
     circlesRef.get().subscribe((docSnapshot) => {
       this.following = docSnapshot.exists;
     });
+  }
+
+  gotoRoute(route) {
+    const id = route.id;
+    console.log(id);
+    this.router.navigate(['route', id]);
   }
 }

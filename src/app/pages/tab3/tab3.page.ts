@@ -2,6 +2,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { Component } from '@angular/core';
 import { Route } from 'src/app/shared/models/route';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'powe-tab3',
@@ -15,7 +16,7 @@ export class Tab3Page {
   photoURL: string;
   name: string;
 
-  constructor(private db: AngularFirestore) {
+  constructor(private db: AngularFirestore, private router: Router) {
     this.getUserData();
   }
 
@@ -32,6 +33,12 @@ export class Tab3Page {
     this.routesRef = this.db.collection<Route>('routes', ref =>
       ref.where('uid', '==', uid).orderBy('datetimeStart', 'desc')
     );
-    this.routes$ = this.routesRef.valueChanges();
+    this.routes$ = this.routesRef.valueChanges({ idField: 'id' });
+  }
+
+  gotoRoute(route) {
+    const id = route.id;
+    console.log(id);
+    this.router.navigate(['route', id]);
   }
 }

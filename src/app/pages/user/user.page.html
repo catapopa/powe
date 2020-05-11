@@ -20,7 +20,7 @@
 
 <ion-content>
   <div *ngFor="let route of routes$ | async" [class.completed]="route.completed">
-    <ion-card>
+    <ion-card (click)="gotoRoute(route)">
       <ion-card-header>
         <ion-row>
           <ion-col>
@@ -50,13 +50,13 @@
         </ion-row>
         <ion-row>
           <ion-col>
-            {{route.distance}}km
+            {{route.distance}}
           </ion-col>
           <ion-col>
             {{route.duration}}
           </ion-col>
           <ion-col>
-            {{route.speed}} km/h
+            {{route.speed}}
           </ion-col>
         </ion-row>
       </ion-card-content>

@@ -1,0 +1,148 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Route</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-row>
+        <ion-col>
+          <ion-card-title>
+            <ion-icon name="today-outline"></ion-icon>
+            {{route?.datetimeStart.seconds * 1000 | date}}
+          </ion-card-title>
+        </ion-col>
+        <ion-col>
+          <ion-card-title>
+            {{route?.datetimeStart.seconds * 1000 | date:'HH:mm'}}
+            -
+            {{route?.datetimeStop.seconds * 1000 | date:'HH:mm'}}
+          </ion-card-title>
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-row>
+        <ion-col>
+          DISTANCE
+        </ion-col>
+        <ion-col>
+          DURATION
+        </ion-col>
+        <ion-col>
+          SPEED
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          {{route?.distance}}
+        </ion-col>
+        <ion-col>
+          {{route?.duration}}
+        </ion-col>
+        <ion-col>
+          {{route?.speed}}
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        <ion-icon name="analytics-outline"></ion-icon>
+        DISTANCE
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-row>
+        <ion-col>
+          TOTAL
+        </ion-col>
+        <ion-col>
+          UPHILL
+        </ion-col>
+        <ion-col>
+          DOWNHILL
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          {{route?.distance}}
+        </ion-col>
+        <ion-col>
+          -
+        </ion-col>
+        <ion-col>
+          -
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        <ion-icon name="rocket-outline"></ion-icon>
+        ALTITUDE
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-row>
+        <ion-col>
+          TOTAL
+        </ion-col>
+        <ion-col>
+          MAX
+        </ion-col>
+        <ion-col>
+          MIN
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          -
+        </ion-col>
+        <ion-col>
+          -
+        </ion-col>
+        <ion-col>
+          -
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        <ion-icon name="speedometer-outline"></ion-icon>
+        SPEED
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-row>
+        <ion-col>
+          AVG
+        </ion-col>
+        <ion-col>
+          MAX
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          {{route?.speed}}
+        </ion-col>
+        <ion-col>
+          -
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

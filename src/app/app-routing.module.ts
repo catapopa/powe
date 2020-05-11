@@ -1,11 +1,12 @@
 import { UserPage } from './pages/user/user.page';
-import { VerifyEmailPage } from './pages/verify-email/verify-email.page';
-import { ForgotPasswordPage } from './pages/forgot-password/forgot-password.page';
-import { RegistrationPage } from './pages/registration/registration.page';
-import { LoginPage } from './pages/login/login.page';
+import { VerifyEmailPage } from './pages/authentication/verify-email/verify-email.page';
+import { ForgotPasswordPage } from './pages/authentication/forgot-password/forgot-password.page';
+import { RegistrationPage } from './pages/authentication/registration/registration.page';
+import { LoginPage } from './pages/authentication/login/login.page';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { HomePage } from 'src/app/pages/home/home.page';
+import { HomePage } from 'src/app/pages/authentication/home/home.page';
+import { RoutePage } from './pages/route/route.page';
 
 const routes: Routes = [
   {
@@ -39,6 +40,10 @@ const routes: Routes = [
   {
     path: 'user/:uid',
     component: UserPage
+  },
+  {
+    path: 'route/:id',
+    component: RoutePage
   }
 ];
 @NgModule({

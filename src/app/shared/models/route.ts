@@ -5,9 +5,9 @@ export interface Route {
     photoURL: string;
     datetimeStart: Date;
     datetimeStop: Date;
-    route: Array<{ lat: number, lng: number }>;
+    route: Array<{ lat: number, lng: number, alt: number }>;
 
     duration: string;
-    distance: number;
-    speed: number;
+    distance: string;
+    speed: string;
 }

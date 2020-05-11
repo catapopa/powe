@@ -6,7 +6,7 @@
 
 <ion-content>
   <div *ngFor="let route of routes$ | async" [class.completed]="route.completed">
-    <ion-card>
+    <ion-card (click)="gotoRoute(route)">
       <ion-card-header>
         <ion-item (click)="gotoProfile(route)">
           <ion-avatar class="image">

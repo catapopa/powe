@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'powe-explore',
@@ -12,8 +13,11 @@ export class ExplorePage implements OnInit {
   users: any[];
   filteredUsers: any[];
   searchTerm = '';
+  routes$: Observable<unknown[]>;
 
-  constructor(private db: AngularFirestore, private router: Router) { }
+  constructor(private db: AngularFirestore, private router: Router) {
+    this.getRoutes();
+  }
 
   ngOnInit() {
     this.db.collection(`users`).valueChanges()
@@ -36,5 +40,16 @@ export class ExplorePage implements OnInit {
   gotoProfile(user) {
     const uid = user.uid;
     this.router.navigate(['user', uid]);
+  }
+
+  getRoutes() {
+    this.routes$ = this.db.collection('routes', ref =>
+      ref.orderBy('datetimeStart', 'desc')).valueChanges({ idField: 'id' });
+  }
+
+  gotoRoute(route) {
+    const id = route.id;
+    console.log(id);
+    this.router.navigate(['route', id]);
   }
 }

@@ -1,10 +1,11 @@
+import { RoutePage } from './pages/route/route.page';
 import { UserPage } from './pages/user/user.page';
 import { GoogleMaps } from '@ionic-native/google-maps';
-import { HomePage } from 'src/app/pages/home/home.page';
-import { ForgotPasswordPage } from './pages/forgot-password/forgot-password.page';
-import { RegistrationPage } from './pages/registration/registration.page';
-import { VerifyEmailPage } from './pages/verify-email/verify-email.page';
-import { LoginPage } from './pages/login/login.page';
+import { HomePage } from 'src/app/pages/authentication/home/home.page';
+import { ForgotPasswordPage } from './pages/authentication/forgot-password/forgot-password.page';
+import { RegistrationPage } from './pages/authentication/registration/registration.page';
+import { VerifyEmailPage } from './pages/authentication/verify-email/verify-email.page';
+import { LoginPage } from './pages/authentication/login/login.page';
 import { SharedModule } from './shared/shared.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -38,7 +39,8 @@ declare var google: google;
     RegistrationPage,
     ForgotPasswordPage,
     LoginPage,
-    UserPage
+    UserPage,
+    RoutePage
   ],
   imports: [
     BrowserModule,

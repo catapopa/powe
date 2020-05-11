@@ -17,11 +17,12 @@ export class Tab2Page implements AfterViewInit, OnDestroy {
 
   isTracking: boolean;
   datetimeStart: Date;
-  route: Array<{ lat: number, lng: number }> = [];
+  route: Array<{ lat: number, lng: number, alt: number }> = [];
   locationWatch;
   map: google.maps.Map;
   lat = 0;
   lng = 0;
+  alt = 0;
   currentMapTrack: any;
 
   constructor(private geolocation: Geolocation, private db: AngularFirestore) { }
@@ -69,7 +70,8 @@ export class Tab2Page implements AfterViewInit, OnDestroy {
       .subscribe(position => {
         this.lat = position.coords.latitude;
         this.lng = position.coords.longitude;
-        this.route.push({ lat: this.lat, lng: this.lng });
+        this.alt = position.coords.altitude;
+        this.route.push({ lat: this.lat, lng: this.lng, alt: this.alt });
         this.redrawPath(this.route);
       });
   }
@@ -107,7 +109,13 @@ export class Tab2Page implements AfterViewInit, OnDestroy {
       const duration = this.convertTimeHours(minutes);
       // distance
       const meters = this.calculateDistanceMeters();
-      const distance = this.convertDistanceKilometers(meters);
+      let distance: string;
+
+      if (meters < 1000) {
+        distance = meters + ' m';
+      } else {
+        distance = this.convertDistanceKilometers(meters);
+      }
       // speed
       const speed = this.calculateSpeed(meters, minutes);
 
@@ -128,7 +136,15 @@ export class Tab2Page implements AfterViewInit, OnDestroy {
     }
   }
 
-  // calculate final distance
+  min(coordType: 'lat' | 'lng'): number {
+    return Math.min(...this.route.map(marker => marker[coordType]));
+  }
+
+  max(coordType: 'lat' | 'lng'): number {
+    return Math.max(...this.route.map(marker => marker[coordType]));
+  }
+
+  // calculate final distance in meters
   calculateDistanceMeters() {
     let distance = 0;
 
@@ -146,12 +162,13 @@ export class Tab2Page implements AfterViewInit, OnDestroy {
 
   // convert meters to kilometer
   convertDistanceKilometers(meters: number) {
-    const result = Math.abs(meters / 1000.0); // km
+    const kilometers = meters / 1000;
+    const result = Math.round(kilometers); // km
 
-    return result;
+    return result + ' km';
   }
 
-  // calculate activity minutes
+  // calculate activity duration in minutes
   calculateTimeMinutes(dt1, dt2) {
     let diff = (dt2.getTime() - dt1.getTime()) / 1000;
     diff /= 60;
@@ -174,12 +191,14 @@ export class Tab2Page implements AfterViewInit, OnDestroy {
 
   // calculate speed and convert to km/h
   calculateSpeed(meters: number, minutes: number) {
+    if (minutes === 0) { return 'Speed of light'; }
+
     const speed = meters / minutes;
     const kmh = speed * 0.060; // 1 m / min = 0.060 km / h
 
     const result = Math.abs(Math.round(kmh));
 
-    return result;
+    return result + ' km/h';
   }
 
   reverseGeocode() {
