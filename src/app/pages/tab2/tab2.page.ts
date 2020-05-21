@@ -3,6 +3,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { filter } from 'rxjs/operators';
 import { google } from 'google-maps';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
 
 declare var google: google;
 
@@ -25,7 +26,7 @@ export class Tab2Page implements AfterViewInit, OnDestroy {
   alt = 0;
   currentMapTrack: any;
 
-  constructor(private geolocation: Geolocation, private db: AngularFirestore) { }
+  constructor(private geolocation: Geolocation, private db: AngularFirestore, private router: Router) { }
 
   ngAfterViewInit() {
     this.getLocation();
@@ -132,7 +133,13 @@ export class Tab2Page implements AfterViewInit, OnDestroy {
         speed
       };
 
-      this.db.collection('routes').add(routeDetails);
+      this.db.collection('routes').add(routeDetails)
+        .then((docRef) => {
+          this.router.navigate(['route-details', docRef.id]);
+        })
+        .catch((error) => {
+          console.error('Error adding route: ', error);
+        });
     }
   }
 

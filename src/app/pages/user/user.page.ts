@@ -70,7 +70,6 @@ export class UserPage {
 
   gotoRoute(route) {
     const id = route.id;
-    console.log(id);
     this.router.navigate(['route', id]);
   }
 }

@@ -10,4 +10,9 @@ export interface Route {
     duration: string;
     distance: string;
     speed: string;
+
+    difficulty?: string;
+    title?: string;
+    description?: string;
+    location?: string;
 }

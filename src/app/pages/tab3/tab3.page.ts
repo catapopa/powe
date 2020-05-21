@@ -38,7 +38,6 @@ export class Tab3Page {
 
   gotoRoute(route) {
     const id = route.id;
-    console.log(id);
     this.router.navigate(['route', id]);
   }
 }

@@ -8,5 +8,5 @@ import { AuthenticationService } from 'src/app/core/authentication.service';
 })
 export class TabsPage {
 
-  constructor(public authService: AuthenticationService) { }
+  constructor() { }
 }

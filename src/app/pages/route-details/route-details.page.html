@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Route details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <form (ngSubmit)="save()">
+      <ion-item>
+        <ion-label position="floating">Title</ion-label>
+        <ion-input [(ngModel)]="title" name="title" type="text" required maxlength=15 autocapitalize="true" clearInput>
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Description</ion-label>
+        <ion-textarea [(ngModel)]="description" name="description" type="text" required maxlength=30
+          autocapitalize="true">
+        </ion-textarea>
+      </ion-item>
+      <ion-item>
+        <input ngx-google-places-autocomplete [(ngModel)]="location" name="location" />
+      </ion-item>
+      <ion-item>
+        <ion-label>Difficulty</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-segment [(ngModel)]="difficulty" name="difficulty" color="primary">
+          <ion-segment-button value="easy"> novice </ion-segment-button>
+          <ion-segment-button value="medium"> medium </ion-segment-button>
+          <ion-segment-button value="advanced"> advanced </ion-segment-button>
+          <ion-segment-button value="extreme"> extreme </ion-segment-button>
+        </ion-segment>
+      </ion-item>
+      <ion-button type="submit" block>Save</ion-button>
+    </form>
+  </ion-grid>
+</ion-content>

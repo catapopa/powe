@@ -1,3 +1,5 @@
+import { MenuComponent } from './menu/menu.component';
+import { RouteDetailsPage } from './pages/route-details/route-details.page';
 import { RoutePage } from './pages/route/route.page';
 import { UserPage } from './pages/user/user.page';
 import { GoogleMaps } from '@ionic-native/google-maps';
@@ -27,7 +29,8 @@ import { environment } from 'src/environments/environment';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { google } from 'google-maps';
-
+import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
+import { AuthenticationService } from './core/authentication.service';
 
 declare var google: google;
 
@@ -40,7 +43,9 @@ declare var google: google;
     ForgotPasswordPage,
     LoginPage,
     UserPage,
-    RoutePage
+    RoutePage,
+    RouteDetailsPage,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
@@ -52,9 +57,11 @@ declare var google: google;
     AngularFirestoreModule,
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    GooglePlaceModule,
   ],
   providers: [
+    AuthenticationService,
     SharedModule,
     StatusBar,
     SplashScreen,

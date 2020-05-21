@@ -7,6 +7,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { HomePage } from 'src/app/pages/authentication/home/home.page';
 import { RoutePage } from './pages/route/route.page';
+import { RouteDetailsPage } from './pages/route-details/route-details.page';
 
 const routes: Routes = [
   {
@@ -44,6 +45,10 @@ const routes: Routes = [
   {
     path: 'route/:id',
     component: RoutePage
+  },
+  {
+    path: 'route-details/:id',
+    component: RouteDetailsPage
   }
 ];
 @NgModule({
