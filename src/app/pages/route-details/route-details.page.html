@@ -9,13 +9,12 @@
     <form (ngSubmit)="save()">
       <ion-item>
         <ion-label position="floating">Title</ion-label>
-        <ion-input [(ngModel)]="title" name="title" type="text" required maxlength=15 autocapitalize="true" clearInput>
+        <ion-input [(ngModel)]="title" name="title" type="text" required maxlength=30 autocapitalize="true" clearInput>
         </ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Description</ion-label>
-        <ion-textarea [(ngModel)]="description" name="description" type="text" required maxlength=30
-          autocapitalize="true">
+        <ion-textarea [(ngModel)]="description" name="description" type="text" maxlength=60 autocapitalize="true">
         </ion-textarea>
       </ion-item>
       <ion-item>
@@ -26,10 +25,10 @@
       </ion-item>
       <ion-item>
         <ion-segment [(ngModel)]="difficulty" name="difficulty" color="primary">
-          <ion-segment-button value="easy"> novice </ion-segment-button>
-          <ion-segment-button value="medium"> medium </ion-segment-button>
-          <ion-segment-button value="advanced"> advanced </ion-segment-button>
-          <ion-segment-button value="extreme"> extreme </ion-segment-button>
+          <ion-segment-button value="Novice"> novice </ion-segment-button>
+          <ion-segment-button value="Medium"> medium </ion-segment-button>
+          <ion-segment-button value="Advanced"> advanced </ion-segment-button>
+          <ion-segment-button value="Extreme"> extreme </ion-segment-button>
         </ion-segment>
       </ion-item>
       <ion-button type="submit" block>Save</ion-button>

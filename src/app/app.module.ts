@@ -1,4 +1,3 @@
-import { MenuComponent } from './menu/menu.component';
 import { RouteDetailsPage } from './pages/route-details/route-details.page';
 import { RoutePage } from './pages/route/route.page';
 import { UserPage } from './pages/user/user.page';
@@ -45,7 +44,6 @@ declare var google: google;
     UserPage,
     RoutePage,
     RouteDetailsPage,
-    MenuComponent
   ],
   imports: [
     BrowserModule,

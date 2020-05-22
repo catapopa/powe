@@ -1,8 +1,7 @@
 import { Route } from './../../shared/models/route';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 
 @Component({
   selector: 'powe-route-details',
@@ -46,6 +45,6 @@ export class RouteDetailsPage {
         console.log('Route successfully saved!');
       });
 
-    this.router.navigate(['route', this.id]);
+    this.router.navigate(['tabs/profile']);
   }
 }
