@@ -11,21 +11,23 @@
   <div *ngFor="let route of routes$ | async" [class.completed]="route.completed">
     <ion-card (click)="gotoRoute(route)">
       <ion-card-header>
-        <ion-row>
-          <ion-col>
-            <ion-icon name="today-sharp"></ion-icon>
-            {{route.datetimeStart.seconds * 1000 | date}}
-          </ion-col>
-          <ion-col>
-            <ion-icon name="time-sharp"></ion-icon>
-            {{route.datetimeStart.seconds * 1000 | date:'HH:mm'}} -
-            {{route.datetimeStop.seconds * 1000 | date:'HH:mm'}}
-          </ion-col>
-          <ion-col>
-            <ion-icon name="flash-sharp"></ion-icon>
-            {{route.difficulty}}
-          </ion-col>
-        </ion-row>
+        <ion-card-subtitle>
+          <ion-row>
+            <ion-col>
+              <ion-icon name="today-sharp"></ion-icon>
+              {{route.datetimeStart.seconds * 1000 | date}}
+            </ion-col>
+            <ion-col>
+              <ion-icon name="time-sharp"></ion-icon>
+              {{route.datetimeStart.seconds * 1000 | date:'HH:mm'}} -
+              {{route.datetimeStop.seconds * 1000 | date:'HH:mm'}}
+            </ion-col>
+            <ion-col>
+              <ion-icon name="flash-sharp"></ion-icon>
+              {{route.difficulty}}
+            </ion-col>
+          </ion-row>
+        </ion-card-subtitle>
         <ion-card-title>{{route.title}}</ion-card-title>
         <ion-card-subtitle>
           <ion-icon name="location-sharp"></ion-icon>

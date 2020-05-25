@@ -1,82 +1,18 @@
 <ion-header>
   <ion-toolbar>
     <ion-searchbar showcancelbutton="" (input)="filterList($event.target.value)"></ion-searchbar>
-
-    <ion-list *ngIf="searchTerm">
-      <ion-item *ngFor="let user of users" (click)="gotoProfile(user)">
-        <ion-avatar class="image">
-          <img src={{user.photoURL}}>
-        </ion-avatar>
-        <ion-label>
-          {{user.name}}
-        </ion-label>
-      </ion-item>
-    </ion-list>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div *ngFor="let route of routes$ | async" [class.completed]="route.completed">
-    <ion-card (click)="gotoRoute(route)">
-      <ion-card-header>
-        <ion-item (click)="gotoProfile(route)">
-          <ion-avatar class="image">
-            <img src={{route.photoURL}}>
-          </ion-avatar>
-          <ion-label>
-            {{route.name}}
-          </ion-label>
-        </ion-item>
-
-        <ion-card-subtitle>
-          <ion-row>
-            <ion-col>
-              <ion-icon name="today-sharp"></ion-icon>
-              {{route.datetimeStart.seconds * 1000 | date}}
-            </ion-col>
-            <ion-col>
-              <ion-icon name="time-sharp"></ion-icon>
-              {{route.datetimeStart.seconds * 1000 | date:'HH:mm'}} -
-              {{route.datetimeStop.seconds * 1000 | date:'HH:mm'}}
-            </ion-col>
-            <ion-col>
-              <ion-icon name="flash-sharp"></ion-icon>
-              {{route.difficulty}}
-            </ion-col>
-          </ion-row>
-        </ion-card-subtitle>
-        <ion-card-title>{{route.title}}</ion-card-title>
-        <ion-card-subtitle>
-          <ion-icon name="location-sharp"></ion-icon>
-          {{route.location}}
-        </ion-card-subtitle>
-        <ion-card-subtitle>{{route.description}}</ion-card-subtitle>
-      </ion-card-header>
-
-      <ion-card-content>
-        <ion-row>
-          <ion-col>
-            DISTANCE
-          </ion-col>
-          <ion-col>
-            DURATION
-          </ion-col>
-          <ion-col>
-            SPEED
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            {{route.distance}}
-          </ion-col>
-          <ion-col>
-            {{route.duration}}
-          </ion-col>
-          <ion-col>
-            {{route.speed}}
-          </ion-col>
-        </ion-row>
-      </ion-card-content>
-    </ion-card>
-  </div>
+  <ion-list *ngIf="searchTerm">
+    <ion-item *ngFor="let user of users" (click)="gotoProfile(user)">
+      <ion-avatar class="image">
+        <img src={{user.photoURL}}>
+      </ion-avatar>
+      <ion-label>
+        {{user.name}}
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

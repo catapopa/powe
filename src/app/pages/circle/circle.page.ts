@@ -1,7 +1,6 @@
-import { Route } from '../../shared/models/route';
 import { Router } from '@angular/router';
-import { Component } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 
 
@@ -13,8 +12,7 @@ import { Observable } from 'rxjs';
 export class CirclePage {
 
   circlesRef: AngularFirestoreCollection<any>;
-  routesRef: AngularFirestoreCollection<Route>;
-  routes$: Observable<Route[]>;
+  routes$: Observable<unknown[]>;
 
   constructor(private db: AngularFirestore, private router: Router) {
     const uid = JSON.parse(localStorage.getItem('user')).uid;
@@ -23,17 +21,22 @@ export class CirclePage {
     this.getRoutes();
   }
 
-  getRoutes() {
-    this.circlesRef.get().subscribe(querySnapshot => {
-      querySnapshot.forEach(doc => {
-        const ruid = doc.id;
+  // getRoutes() {
+  //   this.circlesRef.get().subscribe(querySnapshot => {
+  //     querySnapshot.forEach(doc => {
+  //       const ruid = doc.id;
 
-        this.routesRef = this.db.collection<Route>('routes/' + ruid + '/userRoutes', ref =>
-          ref.orderBy('datetimeStart', 'desc')
-        );
-        this.routes$ = this.routesRef.valueChanges({ idField: 'id' });
-      });
-    });
+  //       this.routesRef = this.db.collection<Route>('routes/' + ruid + '/userRoutes', ref =>
+  //         ref.orderBy('datetimeStart', 'desc')
+  //       );
+  //       this.routes$ = this.routesRef.valueChanges({ idField: 'id' });
+  //     });
+  //   });
+  // }
+
+  getRoutes() {
+    this.routes$ = this.db.collection('routes', ref =>
+      ref.orderBy('datetimeStart', 'desc')).valueChanges({ idField: 'id' });
   }
 
   gotoProfile(route) {

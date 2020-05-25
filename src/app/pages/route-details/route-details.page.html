@@ -21,9 +21,6 @@
         <input ngx-google-places-autocomplete [(ngModel)]="location" name="location" />
       </ion-item>
       <ion-item>
-        <ion-label>Difficulty</ion-label>
-      </ion-item>
-      <ion-item>
         <ion-segment [(ngModel)]="difficulty" name="difficulty" color="primary">
           <ion-segment-button value="Novice"> novice </ion-segment-button>
           <ion-segment-button value="Medium"> medium </ion-segment-button>
@@ -31,7 +28,7 @@
           <ion-segment-button value="Extreme"> extreme </ion-segment-button>
         </ion-segment>
       </ion-item>
-      <ion-button type="submit" block>Save</ion-button>
+      <ion-button type="submit">Save</ion-button>
     </form>
   </ion-grid>
 </ion-content>
