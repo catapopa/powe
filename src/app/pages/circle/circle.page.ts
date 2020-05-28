@@ -14,6 +14,11 @@ export class CirclePage {
   circlesRef: AngularFirestoreCollection<any>;
   routes$: Observable<unknown[]>;
 
+  slideOpts = {
+    initialSlide: 0,
+    speed: 400
+  };
+
   constructor(private db: AngularFirestore, private router: Router) {
     const uid = JSON.parse(localStorage.getItem('user')).uid;
 
@@ -48,5 +53,10 @@ export class CirclePage {
   gotoRoute(route) {
     const id = route.id;
     this.router.navigate(['route', id]);
+  }
+
+  gotoNavigation(route) {
+    const id = route.id;
+    this.router.navigate(['navigate', id]);
   }
 }

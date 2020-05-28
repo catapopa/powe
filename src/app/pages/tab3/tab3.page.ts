@@ -18,7 +18,7 @@ export class Tab3Page {
   lat; lng;
 
   slideOpts = {
-    initialSlide: 1,
+    initialSlide: 0,
     speed: 400
   };
 
