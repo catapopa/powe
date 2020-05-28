@@ -15,6 +15,12 @@ export class Tab3Page {
   routes$: Observable<Route[]>;
   photoURL: string;
   name: string;
+  lat; lng;
+
+  slideOpts = {
+    initialSlide: 1,
+    speed: 400
+  };
 
   constructor(private db: AngularFirestore, private router: Router) {
     this.getUserData();
@@ -39,5 +45,10 @@ export class Tab3Page {
   gotoRoute(route) {
     const id = route.id;
     this.router.navigate(['route', id]);
+  }
+
+  gotoNavigation(route) {
+    const id = route.id;
+    this.router.navigate(['navigate', id]);
   }
 }

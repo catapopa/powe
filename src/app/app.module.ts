@@ -57,7 +57,7 @@ declare var google: google;
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    GooglePlaceModule,
+    GooglePlaceModule
   ],
   providers: [
     AuthenticationService,

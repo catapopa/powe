@@ -1,3 +1,4 @@
+import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentSnapshot, DocumentData } from '@angular/fire/firestore';
 import { Route } from '../models/route';
@@ -30,6 +31,8 @@ export class MapService {
     }
     // speed
     const speed = this.calculateSpeed(meters, minutes);
+    // map preview
+    const preview = this.urlPreview(route);
 
     const routeObj = {
       uid,
@@ -40,7 +43,8 @@ export class MapService {
       route,
       duration,
       distance,
-      speed
+      speed,
+      preview
     };
 
     return this.db.collection('routes').add(routeObj);
@@ -124,5 +128,26 @@ export class MapService {
         }
       }
     });
+  }
+
+  urlPreview(route) {
+    const url = 'https://maps.googleapis.com/maps/api/staticmap?';
+    const center = 'center=' + route[0].lat + ',' + route[0].lng;
+    const zoom = '&zoom=14';
+    const size = '&size=400x200';
+    const type = '&maptype=terrain';
+    let path = '&path=color:0x0000ff|weight:5';
+    const key = '&key=' + environment.map.apiKey;
+
+    route.forEach(element => {
+      const lat = element.lat;
+      const lng = element.lng;
+      const pathLocation = '|' + lat + ',' + lng;
+      path += pathLocation;
+    });
+
+    const result = url + center + zoom + size + type + path + key;
+
+    return result;
   }
 }

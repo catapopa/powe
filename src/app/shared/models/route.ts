@@ -15,4 +15,5 @@ export interface Route {
     title?: string;
     description?: string;
     location?: string;
+    preview: string;
 }

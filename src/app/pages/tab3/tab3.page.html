@@ -9,57 +9,145 @@
 
 <ion-content>
   <div *ngFor="let route of routes$ | async" [class.completed]="route.completed">
-    <ion-card (click)="gotoRoute(route)">
-      <ion-card-header>
-        <ion-card-subtitle>
+    <ion-slides pager="true" [options]="slideOpts">
+      <!-- 1.slide -->
+      <ion-slide>
+        <ion-card (click)="gotoRoute(route)">
+          <ion-card-header>
+            <ion-card-subtitle>
+              <ion-row>
+                <ion-col>
+                  <ion-icon name="today-sharp"></ion-icon>
+                  {{route.datetimeStart.seconds * 1000 | date}}
+                </ion-col>
+                <ion-col>
+                  <ion-icon name="time-sharp"></ion-icon>
+                  {{route.datetimeStart.seconds * 1000 | date:'HH:mm'}} -
+                  {{route.datetimeStop.seconds * 1000 | date:'HH:mm'}}
+                </ion-col>
+                <ion-col>
+                  <ion-icon name="flash-sharp"></ion-icon>
+                  {{route.difficulty}}
+                </ion-col>
+              </ion-row>
+            </ion-card-subtitle>
+            <ion-card-title>{{route.title}}</ion-card-title>
+            <ion-card-subtitle>
+              <ion-icon name="location-sharp"></ion-icon>
+              {{route.location}}
+            </ion-card-subtitle>
+            <ion-card-subtitle>{{route.description}}</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <img src={{route.preview}} (click)="gotoNavigation(route)" />
+            <ion-row>
+              <ion-col>
+                DISTANCE
+              </ion-col>
+              <ion-col>
+                DURATION
+              </ion-col>
+              <ion-col>
+                SPEED
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                {{route.distance}}
+              </ion-col>
+              <ion-col>
+                {{route.duration}}
+              </ion-col>
+              <ion-col>
+                {{route.speed}}
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-slide>
+      <!-- 2.slide -->
+      <ion-slide>
+        <ion-card class='details'>
+          <ion-card-title>
+            <ion-icon name="analytics-outline"></ion-icon>
+            DISTANCE
+          </ion-card-title>
           <ion-row>
             <ion-col>
-              <ion-icon name="today-sharp"></ion-icon>
-              {{route.datetimeStart.seconds * 1000 | date}}
+              TOTAL
             </ion-col>
             <ion-col>
-              <ion-icon name="time-sharp"></ion-icon>
-              {{route.datetimeStart.seconds * 1000 | date:'HH:mm'}} -
-              {{route.datetimeStop.seconds * 1000 | date:'HH:mm'}}
+              UPHILL
             </ion-col>
             <ion-col>
-              <ion-icon name="flash-sharp"></ion-icon>
-              {{route.difficulty}}
+              DOWNHILL
             </ion-col>
           </ion-row>
-        </ion-card-subtitle>
-        <ion-card-title>{{route.title}}</ion-card-title>
-        <ion-card-subtitle>
-          <ion-icon name="location-sharp"></ion-icon>
-          {{route.location}}
-        </ion-card-subtitle>
-        <ion-card-subtitle>{{route.description}}</ion-card-subtitle>
-      </ion-card-header>
+          <ion-row>
+            <ion-col>
+              {{route?.distance}}
+            </ion-col>
+            <ion-col>
+              -
+            </ion-col>
+            <ion-col>
+              -
+            </ion-col>
+          </ion-row>
 
-      <ion-card-content>
-        <ion-row>
-          <ion-col>
-            DISTANCE
-          </ion-col>
-          <ion-col>
-            DURATION
-          </ion-col>
-          <ion-col>
+          <ion-item-divider></ion-item-divider>
+
+          <ion-card-title>
+            <ion-icon name="rocket-outline"></ion-icon>
+            ALTITUDE
+          </ion-card-title>
+          <ion-row>
+            <ion-col>
+              TOTAL
+            </ion-col>
+            <ion-col>
+              MAX
+            </ion-col>
+            <ion-col>
+              MIN
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              -
+            </ion-col>
+            <ion-col>
+              -
+            </ion-col>
+            <ion-col>
+              -
+            </ion-col>
+          </ion-row>
+
+          <ion-item-divider></ion-item-divider>
+
+          <ion-card-title>
+            <ion-icon name="speedometer-outline"></ion-icon>
             SPEED
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            {{route.distance}}
-          </ion-col>
-          <ion-col>
-            {{route.duration}}
-          </ion-col>
-          <ion-col>
-            {{route.speed}}
-          </ion-col>
-        </ion-row>
-      </ion-card-content>
-    </ion-card>
+          </ion-card-title>
+          <ion-row>
+            <ion-col>
+              AVG
+            </ion-col>
+            <ion-col>
+              MAX
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              {{route?.speed}}
+            </ion-col>
+            <ion-col>
+              -
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
   </div>
 </ion-content>
