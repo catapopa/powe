@@ -1,7 +1,8 @@
-import { Route } from './../../shared/models/route';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Route } from './../../shared/models/route';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MapService } from 'src/app/shared/services/map.service';
 
 @Component({
   selector: 'powe-route-details',
@@ -16,16 +17,14 @@ export class RouteDetailsPage {
   location: string;
   difficulty: string;
 
-  constructor(private activatedRoute: ActivatedRoute, private db: AngularFirestore, private router: Router) {
+  constructor(private activatedRoute: ActivatedRoute, private db: AngularFirestore, private router: Router,
+              private mapService: MapService) {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
     this.getRouteData(this.id);
   }
 
   getRouteData(id: string) {
-    // get routes
-    const routeRef = this.db.collection('routes').doc(id);
-
-    routeRef.get().subscribe((result) => {
+    this.db.collection('routes').doc(id).get().subscribe((result) => {
       this.title = result.data().title;
       this.description = result.data().description;
       this.location = result.data().location;
@@ -35,16 +34,13 @@ export class RouteDetailsPage {
   }
 
   save() {
-    this.db.collection('routes').doc(this.id).update({
-      title: this.title,
-      description: this.description,
-      location: this.location,
-      difficulty: this.difficulty
-    })
+    this.mapService.update(this.id, this.title, this.description, this.location, this.difficulty)
       .then(() => {
         console.log('Route successfully saved!');
+        this.router.navigate(['tabs/profile']);
+      })
+      .catch((error) => {
+        console.error('Error updating route: ', error);
       });
-
-    this.router.navigate(['tabs/profile']);
   }
 }

@@ -1,21 +1,24 @@
-import { MapService } from '../../shared/services/map.service';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Component, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MapService } from 'src/app/shared/services/map.service';
+import { google } from 'google-maps';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { filter } from 'rxjs/operators';
-import { google } from 'google-maps';
-import { Router } from '@angular/router';
+
 
 declare var google: google;
 
 @Component({
-  selector: 'powe-tab2',
-  templateUrl: 'tab2.page.html',
-  styleUrls: ['tab2.page.scss']
+  selector: 'powe-navigate',
+  templateUrl: './navigate.page.html',
+  styleUrls: ['./navigate.page.scss'],
 })
-export class Tab2Page implements AfterViewInit, OnDestroy {
+export class NavigatePage implements AfterViewInit, OnDestroy {
 
   @ViewChild('mapContainer', { static: false }) gmap: ElementRef;
 
+  id: string;
   isTracking: boolean;
   marker: google.maps.Marker;
   datetimeStart: Date;
@@ -26,11 +29,24 @@ export class Tab2Page implements AfterViewInit, OnDestroy {
   lng = 0;
   alt = 0;
   currentMapTrack: any;
+  baseRoute: Array<{ lat: number, lng: number, alt: number }> = [];
 
-  constructor(private geolocation: Geolocation, private router: Router, private mapService: MapService) { }
+  constructor(private activatedRoute: ActivatedRoute, private db: AngularFirestore, private router: Router,
+              private mapService: MapService, private geolocation: Geolocation) {
+    this.id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.getRouteData(this.id);
+  }
 
   ngAfterViewInit() {
     this.getLocation();
+  }
+
+  getRouteData(id: string) {
+    this.db.collection('routes').doc(id).get().subscribe((result) => {
+      this.baseRoute = result.data().route;
+      this.mapInitializer();
+      this.redrawPath(this.baseRoute, '#FFFF00');
+    });
   }
 
   async getLocation() {
@@ -38,7 +54,6 @@ export class Tab2Page implements AfterViewInit, OnDestroy {
       const resp = await this.geolocation.getCurrentPosition();
       this.lat = resp.coords.latitude;
       this.lng = resp.coords.longitude;
-      this.mapInitializer();
     } catch (error) {
       console.log('Error getting location', error);
     }
@@ -46,8 +61,9 @@ export class Tab2Page implements AfterViewInit, OnDestroy {
 
   mapInitializer() {
     const coordinates = new google.maps.LatLng(this.lat, this.lng);
+    const baseRouteCoordinates = new google.maps.LatLng(this.baseRoute[0].lat, this.baseRoute[0].lng);
     const mapOptions: google.maps.MapOptions = {
-      center: coordinates,
+      center: baseRouteCoordinates,
       zoom: 14,
       scrollwheel: false,
       disableDoubleClickZoom: true,
@@ -81,21 +97,17 @@ export class Tab2Page implements AfterViewInit, OnDestroy {
         this.lng = position.coords.longitude;
         this.alt = position.coords.altitude;
         this.route.push({ lat: this.lat, lng: this.lng, alt: this.alt });
-        this.redrawPath(this.route);
+        this.redrawPath(this.route, '#FF5733');
         this.moveMarker();
       });
   }
 
-  redrawPath(path) {
-    if (this.currentMapTrack) {
-      this.currentMapTrack.setMap(null);
-    }
-
+  redrawPath(path, strokeColor: string) {
     if (path.length > 1) {
       this.currentMapTrack = new google.maps.Polyline({
         path,
         geodesic: true,
-        strokeColor: '#ff00ff',
+        strokeColor,
         strokeOpacity: 1.0,
         strokeWeight: 3
       });

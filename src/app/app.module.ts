@@ -1,3 +1,4 @@
+import { NavigatePage } from './pages/navigate/navigate.page';
 import { RouteDetailsPage } from './pages/route-details/route-details.page';
 import { RoutePage } from './pages/route/route.page';
 import { UserPage } from './pages/user/user.page';
@@ -11,7 +12,6 @@ import { SharedModule } from './shared/shared.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -44,6 +44,7 @@ declare var google: google;
     UserPage,
     RoutePage,
     RouteDetailsPage,
+    NavigatePage
   ],
   imports: [
     BrowserModule,

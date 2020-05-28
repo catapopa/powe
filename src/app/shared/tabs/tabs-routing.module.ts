@@ -14,8 +14,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () =>
-              import('../../pages/circle/circle.module').then(m => m.CirclePageModule)
+            loadChildren: () => import('../../pages/circle/circle.module').then(m => m.CirclePageModule)
           }
         ]
       },
@@ -24,8 +23,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () =>
-              import('../../pages/explore/explore.module').then(m => m.ExplorePageModule)
+            loadChildren: () => import('../../pages/explore/explore.module').then(m => m.ExplorePageModule)
           }
         ]
       },
@@ -34,9 +32,8 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () =>
-              import('../../pages/tab2/tab2.module').then(m => m.Tab2PageModule)
-          }
+            loadChildren: () => import('../../pages/tab2/tab2.module').then(m => m.Tab2PageModule)
+          },
         ]
       },
       {
@@ -44,8 +41,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () =>
-              import('../../pages/tab3/tab3.module').then(m => m.Tab3PageModule)
+            loadChildren: () => import('../../pages/tab3/tab3.module').then(m => m.Tab3PageModule)
           }
         ]
       },

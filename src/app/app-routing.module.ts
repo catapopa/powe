@@ -8,6 +8,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { HomePage } from 'src/app/pages/authentication/home/home.page';
 import { RoutePage } from './pages/route/route.page';
 import { RouteDetailsPage } from './pages/route-details/route-details.page';
+import { NavigatePage } from './pages/navigate/navigate.page';
 
 const routes: Routes = [
   {
@@ -49,6 +50,10 @@ const routes: Routes = [
   {
     path: 'route-details/:id',
     component: RouteDetailsPage
+  },
+  {
+    path: 'navigate/:id',
+    component: NavigatePage
   }
 ];
 @NgModule({
