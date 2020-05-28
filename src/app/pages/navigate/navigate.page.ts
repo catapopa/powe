@@ -45,7 +45,7 @@ export class NavigatePage implements AfterViewInit, OnDestroy {
     this.db.collection('routes').doc(id).get().subscribe((result) => {
       this.baseRoute = result.data().route;
       this.mapInitializer();
-      this.redrawPath(this.baseRoute, '#FFFF00');
+      this.redrawPath(this.baseRoute, '#0000FF');
     });
   }
 
