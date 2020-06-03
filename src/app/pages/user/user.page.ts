@@ -20,6 +20,11 @@ export class UserPage {
   routesRef: AngularFirestoreCollection<Route>;
   routes$: Observable<Route[]>;
 
+  slideOpts = {
+    initialSlide: 0,
+    speed: 400
+  };
+
   constructor(private route: ActivatedRoute, private db: AngularFirestore, private router: Router) {
     this.cuid = JSON.parse(localStorage.getItem('user')).uid;
     this.uid = this.route.snapshot.paramMap.get('uid');
@@ -71,5 +76,10 @@ export class UserPage {
   gotoRoute(route) {
     const id = route.id;
     this.router.navigate(['route', id]);
+  }
+
+  gotoNavigation(route) {
+    const id = route.id;
+    this.router.navigate(['navigate', id]);
   }
 }

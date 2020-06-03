@@ -50,11 +50,12 @@ export class MapService {
     return this.db.collection('routes').add(routeObj);
   }
 
-  update(id: string, title: string, description: string, location: string, difficulty: string) {
+  update(id: string, title: string, description: string, location: string, type: string, difficulty: string) {
     return this.db.collection('routes').doc(id).update({
       title,
       description,
       location,
+      type,
       difficulty
     });
   }

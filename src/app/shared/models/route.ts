@@ -11,6 +11,7 @@ export interface Route {
     distance: string;
     speed: string;
 
+    type: string;
     difficulty?: string;
     title?: string;
     description?: string;

@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header class="ion-padding">
   <ion-toolbar>
     <ion-title>Activity</ion-title>
   </ion-toolbar>
@@ -6,6 +6,7 @@
 
 <ion-content>
   <div *ngFor="let route of routes$ | async" [class.completed]="route.completed">
+
     <ion-slides pager="true" [options]="slideOpts">
       <!-- 1.slide -->
       <ion-slide>

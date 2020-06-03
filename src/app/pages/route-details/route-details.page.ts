@@ -15,6 +15,7 @@ export class RouteDetailsPage {
   title: string;
   description: string;
   location: string;
+  type: string;
   difficulty: string;
 
   constructor(private activatedRoute: ActivatedRoute, private db: AngularFirestore, private router: Router,
@@ -28,13 +29,14 @@ export class RouteDetailsPage {
       this.title = result.data().title;
       this.description = result.data().description;
       this.location = result.data().location;
+      this.type = result.data().type;
       this.difficulty = result.data().difficulty;
       this.route = result.data() as Route;
     });
   }
 
   save() {
-    this.mapService.update(this.id, this.title, this.description, this.location, this.difficulty)
+    this.mapService.update(this.id, this.title, this.description, this.location, this.type, this.difficulty)
       .then(() => {
         console.log('Route successfully saved!');
         this.router.navigate(['tabs/profile']);
