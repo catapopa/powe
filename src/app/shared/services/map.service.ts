@@ -1,6 +1,7 @@
 import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Route } from '../models/route';
 
 @Injectable({
   providedIn: 'root'
@@ -43,7 +44,10 @@ export class MapService {
       duration,
       distance,
       speed,
-      preview
+      preview,
+      location: '-',
+      type: '-',
+      difficulty: '-'
     };
 
     return this.db.collection('routes').add(routeObj);
@@ -57,6 +61,21 @@ export class MapService {
       type,
       difficulty
     });
+  }
+
+  delete(id: string) {
+    this.db.collection('routes').doc(id).delete();
+  }
+
+  search(location: string, type: string, difficulty: string) {
+    const routes = this.db.collection<Route>('routes', ref =>
+      ref.where('location', '==', location)
+        .where('type', '==', type)
+        .where('difficulty', '==', difficulty)
+        .orderBy('datetimeStart', 'desc'))
+      .valueChanges();
+
+    return routes;
   }
 
   // calculate final distance in meters

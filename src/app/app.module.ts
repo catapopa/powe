@@ -44,12 +44,13 @@ declare var google: google;
     UserPage,
     RoutePage,
     RouteDetailsPage,
-    NavigatePage
+    NavigatePage,
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
+    SharedModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
@@ -57,11 +58,10 @@ declare var google: google;
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    GooglePlaceModule
+    GooglePlaceModule,
   ],
   providers: [
     AuthenticationService,
-    SharedModule,
     StatusBar,
     SplashScreen,
     GooglePlus,

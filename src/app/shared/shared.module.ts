@@ -1,3 +1,4 @@
+import { AlertComponent } from './alert/alert.component';
 import { HttpService } from './http.service';
 import { NgModule, Injectable } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -5,10 +6,10 @@ import { CommonModule } from '@angular/common';
 @Injectable()
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
   ],
   providers: [
-    HttpService
+    HttpService,
   ]
 })
 export class SharedModule { }

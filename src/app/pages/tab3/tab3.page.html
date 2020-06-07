@@ -10,7 +10,6 @@
 <ion-content>
   <div *ngFor="let route of routes$ | async" [class.completed]="route.completed">
     <ion-slides pager="true" [options]="slideOpts">
-      <!-- 1.slide -->
       <ion-slide>
         <ion-card class='slideone'>
           <img src={{route.preview}} (click)="gotoNavigation(route)" />
@@ -64,14 +63,13 @@
                 {{route.difficulty}}
               </ion-col>
               <ion-col>
-                <ion-icon name="flash-sharp"></ion-icon>
+                <ion-icon name="walk-sharp"></ion-icon>
                 {{route.type}}
               </ion-col>
             </ion-row>
           </ion-card-content>
         </ion-card>
       </ion-slide>
-      <!-- 2.slide -->
       <ion-slide>
         <ion-card class='slidetwo'>
           <ion-card-title>

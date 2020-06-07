@@ -1,7 +1,6 @@
 <ion-header class="ion-padding">
   <ion-toolbar>
-    <ion-title>Explore</ion-title>
-    <ion-searchbar showcancelbutton="" (input)="filterList($event.target.value)"></ion-searchbar>
+    <ion-searchbar showcancelbutton="" (input)="searchUser($event.target.value)"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
@@ -16,4 +15,43 @@
       </ion-label>
     </ion-item>
   </ion-list>
+
+  <form (ngSubmit)="searchRoute()" class="ion-padding">
+    <ion-item>
+      <ion-label>Location</ion-label>
+      <input ngx-google-places-autocomplete [(ngModel)]="location" name="location" />
+    </ion-item>
+    <ion-item>
+      <ion-label>Activity type</ion-label>
+      <ion-select [(ngModel)]="type" name="type" okText="Okay" cancelText="Dismiss">
+        <ion-select-option value="Ski">Ski</ion-select-option>
+        <ion-select-option value="Snowboard">Snowboard</ion-select-option>
+        <ion-select-option value="Cycling">Cycling</ion-select-option>
+        <ion-select-option value="Running">Running</ion-select-option>
+        <ion-select-option value="Walking">Walking</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-label class="difficulty">Difficulty</ion-label>
+    <ion-item>
+      <ion-segment [(ngModel)]="difficulty" name="difficulty" color="primary">
+        <ion-segment-button value="Novice"> novice </ion-segment-button>
+        <ion-segment-button value="Medium"> medium </ion-segment-button>
+        <ion-segment-button value="Advanced"> advanced </ion-segment-button>
+        <ion-segment-button value="Extreme"> extreme </ion-segment-button>
+      </ion-segment>
+    </ion-item>
+    <ion-button expand="block" type="submit">explore</ion-button>
+  </form>
+
+  <ion-list>
+    <ion-item *ngFor="let route of routes | async" [class.completed]="route.completed">
+      <!-- <ion-avatar class="image">
+        <img src={{route.photoURL}}>
+      </ion-avatar> -->
+      <ion-label>
+        {{route.title}}
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
 </ion-content>

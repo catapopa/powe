@@ -1,7 +1,9 @@
 import { Router } from '@angular/router';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, QuerySnapshot, DocumentData } from '@angular/fire/firestore';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { MapService } from 'src/app/shared/services/map.service';
+import { Route } from 'src/app/shared/models/route';
 
 @Component({
   selector: 'powe-explore',
@@ -13,21 +15,23 @@ export class ExplorePage implements OnInit {
   users: any[];
   filteredUsers: any[];
   searchTerm = '';
-  routes$: Observable<unknown[]>;
+  location: string;
+  type: string;
+  difficulty: string;
+  routes: Observable<Route[]>;
 
-  constructor(private db: AngularFirestore, private router: Router) {
-    this.getRoutes();
+  constructor(private db: AngularFirestore, private router: Router, private mapService: MapService) {
   }
 
   ngOnInit() {
-    this.db.collection(`users`).valueChanges()
+    this.db.collection('users').valueChanges()
       .subscribe(users => {
         this.users = users;
         this.filteredUsers = users;
       });
   }
 
-  filterList(searchTerm: string) {
+  searchUser(searchTerm: string) {
     this.searchTerm = searchTerm;
 
     this.users = this.filteredUsers;
@@ -37,14 +41,16 @@ export class ExplorePage implements OnInit {
     });
   }
 
+  searchRoute() {
+    this.routes = this.mapService.search(this.location, this.type, this.difficulty);
+    console.log(this.location);
+    console.log(this.type);
+    console.log(this.difficulty);
+  }
+
   gotoProfile(user) {
     const uid = user.uid;
     this.router.navigate(['user', uid]);
-  }
-
-  getRoutes() {
-    this.routes$ = this.db.collection('routes', ref =>
-      ref.orderBy('datetimeStart', 'desc')).valueChanges({ idField: 'id' });
   }
 
   gotoRoute(route) {

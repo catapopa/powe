@@ -108,7 +108,7 @@ export class Tab2Page implements AfterViewInit, OnDestroy {
     this.isTracking = false;
     this.locationWatch.unsubscribe();
 
-    if (this.route.length !== 1) { // device has moved
+    if (this.route.length !== 2) { // device has moved
       this.mapService.create(this.route, this.datetimeStart)
         .then((docRef) => {
           this.router.navigate(['route-details', docRef.id]);
