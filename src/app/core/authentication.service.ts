@@ -84,7 +84,7 @@ export class AuthenticationService {
 
   // Store user in localStorage
   SetUserData(user) {
-    const userRef: AngularFirestoreDocument<any> = this.db.collection('users').doc(`${user.uid}`);
+    const userRef: AngularFirestoreDocument<any> = this.db.collection('users').doc(user.uid);
 
     const userData: User = {
       uid: user.uid,
@@ -92,6 +92,7 @@ export class AuthenticationService {
       name: user.displayName,
       photoURL: user.photoURL,
       emailVerified: user.emailVerified,
+      following: user.following ? user.following : []
     };
 
     return userRef.set(userData);

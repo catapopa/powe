@@ -12,7 +12,8 @@
     <ion-slides pager="true" [options]="slideOpts">
       <!-- 1.slide -->
       <ion-slide>
-        <ion-card>
+        <ion-card class='slideone'>
+          <img src={{route.preview}} (click)="gotoNavigation(route)" />
           <ion-card-header>
             <ion-card-subtitle>
               <ion-row>
@@ -25,10 +26,6 @@
                   {{route.datetimeStart.seconds * 1000 | date:'HH:mm'}} -
                   {{route.datetimeStop.seconds * 1000 | date:'HH:mm'}}
                 </ion-col>
-                <ion-col>
-                  <ion-icon name="flash-sharp"></ion-icon>
-                  {{route.difficulty}}
-                </ion-col>
               </ion-row>
             </ion-card-subtitle>
             <ion-card-title>{{route.title}}</ion-card-title>
@@ -39,7 +36,6 @@
             <ion-card-subtitle>{{route.description}}</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
-            <img src={{route.preview}} (click)="gotoNavigation(route)" />
             <ion-row>
               <ion-col>
                 DISTANCE
@@ -62,12 +58,22 @@
                 {{route.speed}}
               </ion-col>
             </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-icon name="flash-sharp"></ion-icon>
+                {{route.difficulty}}
+              </ion-col>
+              <ion-col>
+                <ion-icon name="flash-sharp"></ion-icon>
+                {{route.type}}
+              </ion-col>
+            </ion-row>
           </ion-card-content>
         </ion-card>
       </ion-slide>
       <!-- 2.slide -->
       <ion-slide>
-        <ion-card class='details'>
+        <ion-card class='slidetwo'>
           <ion-card-title>
             <ion-icon name="analytics-outline"></ion-icon>
             DISTANCE
@@ -149,5 +155,8 @@
         </ion-card>
       </ion-slide>
     </ion-slides>
+  </div>
+  <div class="image-placeholder">
+    <img src="../../../assets/snow.svg" width="200" />
   </div>
 </ion-content>

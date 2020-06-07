@@ -1,23 +1,21 @@
+import { UserService } from './../../shared/services/user.service';
 import { Route } from '../../shared/models/route';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { Component } from '@angular/core';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Circle } from 'src/app/shared/models/circle';
+import { User } from 'src/app/shared/models/user';
 
 @Component({
   selector: 'powe-user',
   templateUrl: './user.page.html',
   styleUrls: ['./user.page.scss'],
 })
-export class UserPage {
+export class UserPage implements OnInit {
 
   following = true;
-  cuid: string;
   uid: string;
-  name: string;
-  photoURL: string;
-  routesRef: AngularFirestoreCollection<Route>;
+  user: User;
   routes$: Observable<Route[]>;
 
   slideOpts = {
@@ -25,52 +23,36 @@ export class UserPage {
     speed: 400
   };
 
-  constructor(private route: ActivatedRoute, private db: AngularFirestore, private router: Router) {
-    this.cuid = JSON.parse(localStorage.getItem('user')).uid;
-    this.uid = this.route.snapshot.paramMap.get('uid');
+  constructor(private route: ActivatedRoute, private db: AngularFirestore, private router: Router, private userService: UserService) {
+  }
 
-    this.getData(this.uid);
+  async ngOnInit() {
+    this.uid = this.route.snapshot.paramMap.get('uid');
+    this.user = (await this.db.collection('users').doc<User>(this.uid).get().toPromise()).data() as User;
+    this.routes$ = this.db.collection<Route>('routes', ref =>
+      ref.where('uid', '==', this.uid).orderBy('datetimeStart', 'desc')
+    ).valueChanges({ idField: 'id' });
     this.isFollowing();
   }
 
-  getData(uid: string) {
-    const usersRef = this.db.collection('users').doc(uid);
-
-    usersRef.get().subscribe((result) => {
-      this.name = result.data().name;
-      this.photoURL = result.data().photoURL;
-    });
-
-    // get routes
-    this.routesRef = this.db.collection<Route>('routes', ref =>
-      ref.where('uid', '==', uid).orderBy('datetimeStart', 'desc')
-    );
-    this.routes$ = this.routesRef.valueChanges({ idField: 'id' });
-  }
-
-  follow() {
-    const circlesRef = this.db.collection('circles/' + this.cuid + '/following').doc(this.uid);
-
-    const circle: Circle = {
-      uid: this.uid
-    };
-
+  async follow() {
+    const authUser = await this.userService.getAuthUserData();
+    const following = authUser.following;
+    following.push(this.uid);
+    this.userService.update({ following });
     this.following = true;
-    return circlesRef.set(circle);
   }
 
-  unfollow() {
-    const circlesRef = this.db.collection('circles/' + this.cuid + '/following').doc(this.uid).delete();
-
+  async unfollow() {
+    const authUser = await this.userService.getAuthUserData();
+    const following = authUser.following.filter(id => id !== this.uid);
+    this.userService.update({ following });
     this.following = false;
   }
 
-  isFollowing() {
-    const circlesRef = this.db.collection('circles/' + this.cuid + '/following').doc(this.uid);
-
-    circlesRef.get().subscribe((docSnapshot) => {
-      this.following = docSnapshot.exists;
-    });
+  async isFollowing() {
+    const authUser = await this.userService.getAuthUserData();
+    this.following = authUser.following.includes(this.uid);
   }
 
   gotoRoute(route) {

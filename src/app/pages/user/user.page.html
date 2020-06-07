@@ -4,11 +4,11 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
-  <ion-item>
+  <ion-item *ngIf="user">
     <ion-avatar class="image">
-      <img src={{photoURL}}>
+      <img src={{user.photoURL}}>
     </ion-avatar>
-    <ion-label>{{name}}</ion-label>
+    <ion-label>{{user.name}}</ion-label>
   </ion-item>
   <div *ngIf="!following">
     <ion-button (click)="follow()">Follow</ion-button>

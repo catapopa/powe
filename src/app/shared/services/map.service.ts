@@ -1,7 +1,6 @@
 import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
-import { AngularFirestore, DocumentSnapshot, DocumentData } from '@angular/fire/firestore';
-import { Route } from '../models/route';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'

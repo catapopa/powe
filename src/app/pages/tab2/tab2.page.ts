@@ -75,7 +75,8 @@ export class Tab2Page implements AfterViewInit, OnDestroy {
     this.route = [];
     this.datetimeStart = new Date();
 
-    this.locationWatch = this.geolocation.watchPosition().pipe(filter((p) => p.coords !== undefined))
+    this.locationWatch = this.geolocation.watchPosition()
+      .pipe(filter((p) => p.coords !== undefined))
       .subscribe(position => {
         this.lat = position.coords.latitude;
         this.lng = position.coords.longitude;

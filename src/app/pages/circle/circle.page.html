@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-  <div *ngFor="let route of routes$ | async" [class.completed]="route.completed">
+  <div *ngFor="let route of routes | async" [class.completed]="route.completed">
 
     <ion-slides pager="true" [options]="slideOpts">
       <!-- 1.slide -->
