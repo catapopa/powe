@@ -2,6 +2,26 @@
   height: 80px;
   width: 80px;
   border: 2px solid #fff;
-  box-shadow: 0 0 5px gray;
+  box-shadow: 0 0 5px var(--secondary);
   margin: 5px 10px;
+}
+
+.name {
+  margin-left: 10px;
+}
+
+.profile {
+  padding: 10px 20px;
+}
+
+.follow {
+  background: var(--primary);
+  margin-right: 20px;
+  border-radius: 8px;
+}
+
+.unfollow {
+  background: var(--danger);
+  margin-right: 20px;
+  border-radius: 8px;
 }

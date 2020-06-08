@@ -1,5 +1,6 @@
+import { User } from './../../shared/models/user';
 import { Router } from '@angular/router';
-import { AngularFirestore, QuerySnapshot, DocumentData } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MapService } from 'src/app/shared/services/map.service';
@@ -29,13 +30,13 @@ export class ExplorePage implements OnInit {
         this.users = users;
         this.filteredUsers = users;
       });
+
+    this.difficulty = 'Medium';
   }
 
   searchUser(searchTerm: string) {
     this.searchTerm = searchTerm;
-
     this.users = this.filteredUsers;
-
     this.users = this.users.filter(user => {
       return user.name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
     });

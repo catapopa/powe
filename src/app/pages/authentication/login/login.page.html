@@ -1,6 +1,6 @@
-<ion-header class="ion-padding">
+<ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
+    <ion-buttons>
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>Login</ion-title>
@@ -8,13 +8,19 @@
 </ion-header>
 
 <ion-content class="ion-padding">
+  <div class="image-placeholder">
+    <img src="../../../assets/welcome.svg" width="200" />
+  </div>
+
   <form>
-    <ion-label position="floating">Email</ion-label>
-    <ion-input type="text" #email required></ion-input>
-
-    <ion-label position="floating">Password</ion-label>
-    <ion-input type="password" #password required></ion-input>
-
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="text" #email required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Password</ion-label>
+      <ion-input type="password" #password required></ion-input>
+    </ion-item>
     <ion-button type="submit" (click)="logIn(email, password)" expand="block">Login</ion-button>
   </form>
 
@@ -22,9 +28,12 @@
     <ion-icon name="logo-google"></ion-icon>
     Google
   </ion-button>
-
-  Don't have an account?
-  <a [routerLink]="['/registration']">Log in</a>
-  <a [routerLink]=" ['/forgot-password']">Forgot Password?</a>
-
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-text>Don't have an account?</ion-text>
+    <a [routerLink]="['/registration']">Register</a>
+    <a [routerLink]=" ['/forgot-password']">Forgot Password?</a>
+  </ion-toolbar>
+</ion-footer>

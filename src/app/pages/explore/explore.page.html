@@ -1,6 +1,6 @@
-<ion-header class="ion-padding">
+<ion-header>
   <ion-toolbar>
-    <ion-searchbar showcancelbutton="" (input)="searchUser($event.target.value)"></ion-searchbar>
+    <ion-searchbar showcancelbutton (input)="searchUser($event.target.value)"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
@@ -21,6 +21,7 @@
       <ion-label>Location</ion-label>
       <input ngx-google-places-autocomplete [(ngModel)]="location" name="location" />
     </ion-item>
+
     <ion-item>
       <ion-label>Activity type</ion-label>
       <ion-select [(ngModel)]="type" name="type" okText="Okay" cancelText="Dismiss">
@@ -31,6 +32,7 @@
         <ion-select-option value="Walking">Walking</ion-select-option>
       </ion-select>
     </ion-item>
+
     <ion-label class="difficulty">Difficulty</ion-label>
     <ion-item>
       <ion-segment [(ngModel)]="difficulty" name="difficulty" color="primary">
@@ -44,14 +46,10 @@
   </form>
 
   <ion-list>
-    <ion-item *ngFor="let route of routes | async" [class.completed]="route.completed">
-      <!-- <ion-avatar class="image">
-        <img src={{route.photoURL}}>
-      </ion-avatar> -->
+    <ion-item *ngFor="let route of routes | async">
       <ion-label>
         {{route.title}}
       </ion-label>
     </ion-item>
   </ion-list>
-
 </ion-content>

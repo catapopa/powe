@@ -1,25 +1,24 @@
-<ion-header class="ion-padding">
-  <ion-toolbar>
+<ion-header>
+  <ion-toolbar color="secondary">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
+    <div class="name" *ngIf="user">- {{user.name}} -</div>
+    <ion-buttons slot="end">
+      <ion-button class="follow" *ngIf="!following" (click)="follow()">Follow</ion-button>
+      <ion-button class="unfollow" *ngIf="following" (click)="unfollow()">Unfollow</ion-button>
+    </ion-buttons>
   </ion-toolbar>
-  <ion-item *ngIf="user">
+
+  <div class="profile" *ngIf="user">
     <ion-avatar class="image">
       <img src={{user.photoURL}}>
     </ion-avatar>
-    <ion-label>{{user.name}}</ion-label>
-  </ion-item>
-  <div *ngIf="!following">
-    <ion-button (click)="follow()">Follow</ion-button>
-  </div>
-  <div *ngIf="following">
-    <ion-button (click)="unfollow()">Unfollow</ion-button>
   </div>
 </ion-header>
 
 <ion-content>
-  <div *ngFor="let route of routes$ | async" [class.completed]="route.completed">
+  <div *ngFor="let route of routes$ | async">
     <ion-slides pager="true" [options]="slideOpts">
       <!-- 1.slide -->
       <ion-slide>

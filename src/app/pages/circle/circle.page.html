@@ -1,11 +1,11 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="secondary">
     <ion-title>Activity</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div *ngFor="let route of routes | async" [class.completed]="route.completed">
+  <div *ngFor="let route of routes | async">
     <ion-item>
       <ion-avatar class="profile-image">
         <img src={{route.photoURL}}>
