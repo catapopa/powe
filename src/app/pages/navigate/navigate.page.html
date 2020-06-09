@@ -1,6 +1,8 @@
-<ion-header class="ion-padding">
-  <ion-toolbar>
-    <ion-title>Navigate</ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -11,8 +13,18 @@
     <ion-icon name="locate"></ion-icon>
     Start Tracking
   </ion-button>
-  <ion-button expand="block" color="danger" icon-left (click)="stopTracking()" *ngIf="isTracking">
-    <ion-icon name="hand"></ion-icon>
-    Stop Tracking
-  </ion-button>
+  <ion-row class="bottomRow">
+    <ion-col>
+      <ion-button expand="block" color="danger" icon-left (click)="stopTracking()" *ngIf="isTracking">
+        <ion-icon name="hand-left-outline"></ion-icon>
+        Stop Tracking
+      </ion-button>
+    </ion-col>
+    <ion-col>
+      <ion-button expand="block" color="warning" icon-left (click)="cancelTracking()" *ngIf="isTracking">
+        <ion-icon name="remove-circle-outline"></ion-icon>
+        Cancel
+      </ion-button>
+    </ion-col>
+  </ion-row>
 </ion-content>

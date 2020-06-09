@@ -1,1 +1,7 @@
-
+ion-tab-bar {
+  --background: var(--primary);
+  --color: white;
+  --color-selected: var(--warning);
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+}

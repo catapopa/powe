@@ -1,11 +1,19 @@
-ion-content ion-toolbar {
-  --background: translucent;
-}
-
-.map {
-  height: 90%;
+ion-content {
+  --overflow: hidden;
 }
 
 ion-icon {
   margin-right: 10px;
+}
+
+ion-button {
+  height: 45px;
+}
+
+.bottomRow {
+  margin-top: -5px;
+}
+
+.map {
+  height: 90%;
 }

@@ -1,18 +1,18 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons>
+  <ion-toolbar color="warning">
+    <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>Login</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <div class="image-placeholder">
-    <img src="../../../assets/welcome.svg" width="200" />
+<ion-content>
+  <div class="image">
+    <img src="../../../assets/login.svg" width="200" />
   </div>
 
-  <form>
+  <div class="fields">
     <ion-item>
       <ion-label position="floating">Email</ion-label>
       <ion-input type="text" #email required></ion-input>
@@ -21,19 +21,28 @@
       <ion-label position="floating">Password</ion-label>
       <ion-input type="password" #password required></ion-input>
     </ion-item>
-    <ion-button type="submit" (click)="logIn(email, password)" expand="block">Login</ion-button>
-  </form>
+  </div>
 
-  <ion-button type="submit" color="danger" (click)="authService.GoogleAuth()" expand="block">
-    <ion-icon name="logo-google"></ion-icon>
-    Google
-  </ion-button>
+  <div class="buttons">
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="warning" (click)="logIn(email, password)" expand="block" shape="round">Login
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button type="submit" color="danger" (click)="authService.GoogleAuth()" expand="block" shape="round">
+          <ion-icon name="logo-google"></ion-icon>
+          <ion-text>Google</ion-text>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+  <a class="password" [routerLink]=" ['/forgot-password']">Forgot Password?</a>
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
     <ion-text>Don't have an account?</ion-text>
     <a [routerLink]="['/registration']">Register</a>
-    <a [routerLink]=" ['/forgot-password']">Forgot Password?</a>
   </ion-toolbar>
 </ion-footer>

@@ -32,13 +32,13 @@ export class NavigatePage implements AfterViewInit, OnDestroy {
   baseRoute: Array<{ lat: number, lng: number, alt: number }> = [];
 
   constructor(private activatedRoute: ActivatedRoute, private db: AngularFirestore, private router: Router,
-              private mapService: MapService, private geolocation: Geolocation) {
+    private mapService: MapService, private geolocation: Geolocation) {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
     this.getRouteData(this.id);
   }
 
-  ngAfterViewInit() {
-    this.getLocation();
+  async ngAfterViewInit() {
+    await this.getLocation();
   }
 
   getRouteData(id: string) {
@@ -130,7 +130,16 @@ export class NavigatePage implements AfterViewInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {
+  async cancelTracking() {
+    this.isTracking = false;
+    this.route = [];
+    this.redrawPath(this.route, '#FF5733');
+    this.getRouteData(this.id);
+    await this.getLocation();
+    this.locationWatch.unsubscribe();
+  }
+
+  ngOnDestroy() {
     this.locationWatch.unsubscribe();
   }
 }

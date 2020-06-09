@@ -1,16 +1,8 @@
-<ion-header class="ion-padding">
-  <div class="login-header ion-padding">
-    <ion-icon class="logo" name="snow-outline"></ion-icon>
-  </div>
-</ion-header>
-
-<ion-content class="ion-padding">
+<ion-content>
   <div class="center">
-    <ion-button [routerLink]="['/registration']" expand="block" color="primary">Sign up</ion-button>
-
-    <span class="divider line one-line">or</span>
-    <span class="already">Already a user?</span>
-
-    <ion-button [routerLink]="['/login']" expand="block" color="danger">Login</ion-button>
+    <ion-button color="warning" [routerLink]="['/registration']" expand="block" shape="round">Register</ion-button>
+    <!-- <span class="divider line one-line">or</span>
+    <span class="already">Already a user?</span> -->
+    <ion-button [routerLink]="['/login']" expand="block" shape="round">Login</ion-button>
   </div>
 </ion-content>

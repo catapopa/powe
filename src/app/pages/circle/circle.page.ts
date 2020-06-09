@@ -14,7 +14,7 @@ import { Observable } from 'rxjs';
 export class CirclePage {
 
   circlesRef: AngularFirestoreCollection<any>;
-  routes: Observable<Route[]>;
+  routes: Observable<Route[]> = null;
 
   slideOpts = {
     initialSlide: 0,
@@ -28,9 +28,12 @@ export class CirclePage {
   async getRoutes() {
     const user = await this.userService.getAuthUserRef().get().toPromise();
     const following = user.get('following');
-    this.routes = this.db.collection<Route>('routes', ref =>
-      ref.where('uid', 'in', following).orderBy('datetimeStart', 'desc'))
-      .valueChanges();
+
+    if (following.length > 0) {
+      this.routes = this.db.collection<Route>('routes', ref =>
+        ref.where('uid', 'in', following).orderBy('datetimeStart', 'desc'))
+        .valueChanges();
+    }
   }
 
   gotoProfile(route) {

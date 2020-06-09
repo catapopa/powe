@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="warning">
     <ion-searchbar showcancelbutton (input)="searchUser($event.target.value)"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
@@ -42,7 +42,8 @@
         <ion-segment-button value="Extreme"> extreme </ion-segment-button>
       </ion-segment>
     </ion-item>
-    <ion-button expand="block" type="submit">explore</ion-button>
+
+    <ion-button expand="block" type="submit" shape="round">explore</ion-button>
   </form>
 
   <ion-list>
@@ -52,4 +53,8 @@
       </ion-label>
     </ion-item>
   </ion-list>
+
+  <div class="image-placeholder">
+    <img src="../../../assets/search.svg" width="250" />
+  </div>
 </ion-content>

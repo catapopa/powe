@@ -19,8 +19,9 @@ export class RouteDetailsPage {
   difficulty: string;
 
   constructor(private activatedRoute: ActivatedRoute, private db: AngularFirestore, private router: Router,
-              private mapService: MapService) {
+    private mapService: MapService) {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.difficulty = 'Medium';
     this.getRouteData(this.id);
   }
 

@@ -1,14 +1,12 @@
-.login-header {
-  background: var(--primary);
+ion-content {
+  --background: url(../../../../assets/snow.jpg) 0 0/100% 100% no-repeat;
+  --color: white;
 }
 
-.logo {
-  display: block;
-  width: 120px;
-  height: 120px;
-  margin: 0 auto;
-  text-align: center;
-  color: var(--light);
+ion-button {
+  width: 250px;
+  height: 50px;
+  margin: 10px;
 }
 
 .center {
@@ -31,7 +29,7 @@
 .line {
   align-items: center;
   margin: 1em -1em;
-  color: #cccccc;
+  color: white;
 
   &:before,
   &:after {
@@ -43,7 +41,7 @@
 .one-line {
   &:before,
   &:after {
-    background: #cccccc;
+    background: white;
   }
 }
 

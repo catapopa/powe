@@ -1,12 +1,22 @@
 <ion-content [fullscreen]="true">
   <div #mapContainer id="map" class="map"></div>
 
-  <ion-button expand="block" class="start" icon-left (click)="startTracking()" *ngIf="!isTracking">
+  <ion-button expand="block" color="success" icon-left (click)="startTracking()" *ngIf="!isTracking">
     <ion-icon name="locate"></ion-icon>
     Start Tracking
   </ion-button>
-  <ion-button expand="block" class="start" icon-left (click)="stopTracking()" *ngIf="isTracking">
-    <ion-icon name="hand"></ion-icon>
-    Stop Tracking
-  </ion-button>
+  <ion-row class="bottomRow">
+    <ion-col>
+      <ion-button expand="block" color="danger" icon-left (click)="stopTracking()" *ngIf="isTracking">
+        <ion-icon name="hand-left-outline"></ion-icon>
+        Stop Tracking
+      </ion-button>
+    </ion-col>
+    <ion-col>
+      <ion-button expand="block" color="warning" icon-left (click)="cancelTracking()" *ngIf="isTracking">
+        <ion-icon name="remove-circle-outline"></ion-icon>
+        Cancel
+      </ion-button>
+    </ion-col>
+  </ion-row>
 </ion-content>

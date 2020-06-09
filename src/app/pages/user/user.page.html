@@ -1,9 +1,9 @@
 <ion-header>
-  <ion-toolbar color="secondary">
+  <ion-toolbar color="warning">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <div class="name" *ngIf="user">- {{user.name}} -</div>
+    <div class="name" *ngIf="user">{{user.name}}</div>
     <ion-buttons slot="end">
       <ion-button class="follow" *ngIf="!following" (click)="follow()">Follow</ion-button>
       <ion-button class="unfollow" *ngIf="following" (click)="unfollow()">Unfollow</ion-button>
@@ -159,5 +159,9 @@
         </ion-card>
       </ion-slide>
     </ion-slides>
+  </div>
+
+  <div class="image-placeholder">
+    <img src="../../../assets/user.svg" width="250" />
   </div>
 </ion-content>

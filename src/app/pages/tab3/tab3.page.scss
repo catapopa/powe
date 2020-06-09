@@ -22,7 +22,7 @@ ion-title {
   height: 80px;
   width: 80px;
   border: 2px solid #fff;
-  box-shadow: 0 0 5px gray;
+  box-shadow: 0 0 5px rgb(27, 27, 27);
   margin: 5px 10px;
 }
 
@@ -39,5 +39,6 @@ ion-title {
 }
 
 .image-placeholder {
+  margin-top: 50%;
   text-align: center;
 }

@@ -29,8 +29,8 @@ export class Tab2Page implements AfterViewInit, OnDestroy {
 
   constructor(private geolocation: Geolocation, private router: Router, private mapService: MapService) { }
 
-  ngAfterViewInit() {
-    this.getLocation();
+  async ngAfterViewInit() {
+    await this.getLocation();
   }
 
   async getLocation() {
@@ -70,23 +70,6 @@ export class Tab2Page implements AfterViewInit, OnDestroy {
     this.map.panTo(coordinates);
   }
 
-  startTracking() {
-    this.isTracking = true;
-    this.route = [];
-    this.datetimeStart = new Date();
-
-    this.locationWatch = this.geolocation.watchPosition()
-      .pipe(filter((p) => p.coords !== undefined))
-      .subscribe(position => {
-        this.lat = position.coords.latitude;
-        this.lng = position.coords.longitude;
-        this.alt = position.coords.altitude;
-        this.route.push({ lat: this.lat, lng: this.lng, alt: this.alt });
-        this.redrawPath(this.route);
-        this.moveMarker();
-      });
-  }
-
   redrawPath(path) {
     if (this.currentMapTrack) {
       this.currentMapTrack.setMap(null);
@@ -104,6 +87,23 @@ export class Tab2Page implements AfterViewInit, OnDestroy {
     }
   }
 
+  startTracking() {
+    this.isTracking = true;
+    this.route = [];
+    this.datetimeStart = new Date();
+
+    this.locationWatch = this.geolocation.watchPosition()
+      .pipe(filter((p) => p.coords !== undefined))
+      .subscribe(position => {
+        this.lat = position.coords.latitude;
+        this.lng = position.coords.longitude;
+        this.alt = position.coords.altitude;
+        this.route.push({ lat: this.lat, lng: this.lng, alt: this.alt });
+        this.redrawPath(this.route);
+        this.moveMarker();
+      });
+  }
+
   stopTracking() {
     this.isTracking = false;
     this.locationWatch.unsubscribe();
@@ -119,7 +119,15 @@ export class Tab2Page implements AfterViewInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {
+  async cancelTracking() {
+    this.isTracking = false;
+    this.route = [];
+    this.redrawPath(this.route);
+    await this.getLocation();
+    this.locationWatch.unsubscribe();
+  }
+
+  ngOnDestroy() {
     this.locationWatch.unsubscribe();
   }
 }
