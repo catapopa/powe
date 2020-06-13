@@ -15,6 +15,8 @@ export class Tab3Page {
   routes$: Observable<Route[]>;
   photoURL: string;
   name: string;
+  bio: string;
+  location: string;
   lat; lng;
 
   slideOpts = {
@@ -33,6 +35,8 @@ export class Tab3Page {
     usersRef.get().subscribe((result) => {
       this.photoURL = result.data().photoURL;
       this.name = result.data().name;
+      this.bio = result.data().bio;
+      this.location = result.data().location;
     });
 
     // get routes

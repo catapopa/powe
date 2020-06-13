@@ -1,17 +1,25 @@
+ion-header {
+  color: var(--ion-color-dark-tint);
+}
+
+.profile {
+  margin-right: 10px;
+}
+
+.bio {
+  margin: 20px;
+}
+
 .image {
   height: 80px;
   width: 80px;
   border: 2px solid #fff;
-  box-shadow: 0 0 5px gray;
-  margin: 5px 10px;
+  box-shadow: 0 0 5px rgb(27, 27, 27);
+  margin: 20px;
 }
 
 .name {
   margin-left: 10px;
-}
-
-.profile {
-  padding: 10px 20px;
 }
 
 .follow {

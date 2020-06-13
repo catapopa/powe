@@ -92,7 +92,9 @@ export class AuthenticationService {
       name: user.displayName,
       photoURL: user.photoURL,
       emailVerified: user.emailVerified,
-      following: user.following ? user.following : []
+      following: user.following ? user.following : [],
+      bio: user.bio ? user.bio : '-',
+      location: user.location ? user.location : '-'
     };
 
     return userRef.set(userData);

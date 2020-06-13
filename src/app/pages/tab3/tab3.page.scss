@@ -2,20 +2,16 @@ ion-content ion-toolbar {
   --background: translucent;
 }
 
+ion-header {
+  color: var(--ion-color-dark-tint);
+}
+
 ion-item-divider {
   margin-bottom: 15px;
 }
 
-ion-card-title {
-  margin-bottom: 5px;
-}
-
-ion-title {
-  margin-left: 10px;
-}
-
 .profile {
-  margin: 10px 30px;
+  margin-right: 10px;
 }
 
 .image {
@@ -23,7 +19,7 @@ ion-title {
   width: 80px;
   border: 2px solid #fff;
   box-shadow: 0 0 5px rgb(27, 27, 27);
-  margin: 5px 10px;
+  margin: 20px;
 }
 
 .slideone {
@@ -41,4 +37,8 @@ ion-title {
 .image-placeholder {
   margin-top: 50%;
   text-align: center;
+}
+
+.name {
+  margin-left: 20px;
 }

@@ -3,17 +3,24 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <div class="name" *ngIf="user">{{user.name}}</div>
     <ion-buttons slot="end">
       <ion-button class="follow" *ngIf="!following" (click)="follow()">Follow</ion-button>
       <ion-button class="unfollow" *ngIf="following" (click)="unfollow()">Unfollow</ion-button>
     </ion-buttons>
   </ion-toolbar>
 
-  <div class="profile" *ngIf="user">
-    <ion-avatar class="image">
-      <img src={{user.photoURL}}>
-    </ion-avatar>
+  <div *ngIf="user">
+    <ion-item class="profile">
+      <ion-avatar class="image">
+        <img src={{user.photoURL}}>
+      </ion-avatar>
+      <ion-label>
+        <h1>{{user.name}}</h1>
+      </ion-label>
+    </ion-item>
+    <p class="bio">
+      {{user.bio}}
+    </p>
   </div>
 </ion-header>
 

@@ -5,4 +5,6 @@ export interface User {
     photoURL: string;
     emailVerified: boolean;
     following: string[];
+    bio: string;
+    location: string;
 }
