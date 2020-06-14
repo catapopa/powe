@@ -10,6 +10,37 @@ ion-item-divider {
   margin-bottom: 15px;
 }
 
+ion-card-title {
+  color: var(--ion-color-primary-shade);
+  font-weight: 600;
+}
+
+ion-icon {
+  color: var(--ion-color-warning);
+}
+
+.location {
+  color: var(--ion-color-dark-tint);
+}
+
+.detail-headers {
+  color: var(--ion-color-primary-shade);
+  font-weight: 600;
+}
+
+.detail-data {
+  color: var(--ion-color-dark-tint);
+}
+
+.bio {
+  color: gray;
+  padding: 0px 10px;
+}
+
+.shadow {
+  box-shadow: 0px 0px 20px 0px gray;
+}
+
 .profile {
   margin-right: 10px;
 }

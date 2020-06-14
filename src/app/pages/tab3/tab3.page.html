@@ -1,12 +1,13 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Profile</ion-title>
     <ion-buttons slot="end">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
+</ion-header>
 
-  <div>
+<ion-content>
+  <div class="shadow">
     <ion-item class="profile">
       <ion-avatar class="image">
         <img src={{photoURL}}>
@@ -19,18 +20,15 @@
         </p>
       </ion-label>
     </ion-item>
-    <ion-item>
-      <p>{{bio}}</p>
+    <ion-item class="bio">
+      <p class="ion-text-justify">{{bio}}</p>
     </ion-item>
   </div>
-</ion-header>
 
-<ion-content>
   <div *ngFor="let route of routes$ | async">
     <ion-slides pager="true" [options]="slideOpts">
       <ion-slide>
         <ion-card class='slideone'>
-          <img src={{route.preview}} (click)="gotoNavigation(route)" />
           <ion-card-header>
             <ion-card-subtitle>
               <ion-row>
@@ -44,16 +42,27 @@
                   {{route.datetimeStop.seconds * 1000 | date:'HH:mm'}}
                 </ion-col>
               </ion-row>
+              <img src={{route.preview}} (click)="gotoNavigation(route)" />
+              <ion-row>
+                <ion-col>
+                  <ion-icon name="flash-sharp"></ion-icon>
+                  {{route.difficulty}}
+                </ion-col>
+                <ion-col>
+                  <ion-icon name="walk-sharp"></ion-icon>
+                  {{route.type}}
+                </ion-col>
+              </ion-row>
             </ion-card-subtitle>
             <ion-card-title>{{route.title}}</ion-card-title>
-            <ion-card-subtitle>
+            <ion-card-subtitle>{{route.description}}</ion-card-subtitle>
+            <ion-card-subtitle class="location">
               <ion-icon name="location-sharp"></ion-icon>
               {{route.location}}
             </ion-card-subtitle>
-            <ion-card-subtitle>{{route.description}}</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content (click)="gotoRoute(route)">
-            <ion-row>
+            <ion-row class="detail-headers">
               <ion-col>
                 DISTANCE
               </ion-col>
@@ -64,7 +73,7 @@
                 SPEED
               </ion-col>
             </ion-row>
-            <ion-row>
+            <ion-row class="detail-data">
               <ion-col>
                 {{route.distance}}
               </ion-col>
@@ -73,16 +82,6 @@
               </ion-col>
               <ion-col>
                 {{route.speed}}
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col>
-                <ion-icon name="flash-sharp"></ion-icon>
-                {{route.difficulty}}
-              </ion-col>
-              <ion-col>
-                <ion-icon name="walk-sharp"></ion-icon>
-                {{route.type}}
               </ion-col>
             </ion-row>
           </ion-card-content>
