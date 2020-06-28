@@ -107,7 +107,9 @@ export class MapService {
     diff /= 60;
 
     const result = Math.abs(Math.round(diff));
-
+    if (result == 0) {
+      return 1;
+    }
     return result;
   }
 
