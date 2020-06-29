@@ -57,4 +57,9 @@ export class ExplorePage implements OnInit {
     const id = route.id;
     this.router.navigate(['route', id]);
   }
+
+  gotoNavigation(route) {
+    const id = route.id;
+    this.router.navigate(['navigate', id]);
+  }
 }

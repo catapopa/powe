@@ -46,12 +46,16 @@
     <ion-button expand="block" type="submit" shape="round">explore</ion-button>
   </form>
 
-  <ion-list>
-    <ion-item *ngFor="let route of routes | async">
-      <ion-label>
-        {{route.title}}
-      </ion-label>
-    </ion-item>
+  <ion-list *ngFor="let route of routes | async">
+    <ion-card>
+      <ion-item (click)="gotoProfile(route)">
+        <ion-avatar class="profile-image">
+          <img src={{route.photoURL}}>
+        </ion-avatar>
+        <ion-label>{{route.name}}</ion-label>
+      </ion-item>
+      <img src={{route.preview}} (click)="gotoNavigation(route)" />
+    </ion-card>
   </ion-list>
 
   <div class="image-placeholder">

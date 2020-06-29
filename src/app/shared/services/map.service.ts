@@ -73,7 +73,7 @@ export class MapService {
         .where('type', '==', type)
         .where('difficulty', '==', difficulty)
         .orderBy('datetimeStart', 'desc'))
-      .valueChanges();
+      .valueChanges({ idField: 'id' });
 
     return routes;
   }
