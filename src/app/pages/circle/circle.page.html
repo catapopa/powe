@@ -5,7 +5,7 @@
 
 <ion-content>
   <div *ngFor="let route of routes | async">
-    <ion-item>
+    <ion-item (click)="gotoProfile(route)">
       <ion-avatar class="profile-image">
         <img src={{route.photoURL}}>
       </ion-avatar>

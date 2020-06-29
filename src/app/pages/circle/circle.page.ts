@@ -28,11 +28,10 @@ export class CirclePage {
   async getRoutes() {
     const user = await this.userService.getAuthUserRef().get().toPromise();
     const following = user.get('following');
-
     if (following.length > 0) {
       this.routes = this.db.collection<Route>('routes', ref =>
         ref.where('uid', 'in', following).orderBy('datetimeStart', 'desc'))
-        .valueChanges();
+        .valueChanges({ idField: 'id' });
     }
   }
 

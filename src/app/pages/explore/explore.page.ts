@@ -1,4 +1,3 @@
-import { User } from './../../shared/models/user';
 import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Component, OnInit } from '@angular/core';
